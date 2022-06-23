@@ -738,7 +738,7 @@ public class Ticket {
 		@Override
 		public void updateState(Command command) {
 			
-			switch (command.getCommandValue()) {
+			switch (command.getCommand()) {
 			
 			case PROCESS:
 				state = workingState;
