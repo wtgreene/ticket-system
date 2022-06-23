@@ -29,7 +29,7 @@ public class CommandTest {
 	@Test
 	public void testGetCommandValue() {
 		Command c = new Command(Command.CommandValue.PROCESS, "wgreene", null, null, null, "hi");
-		assertEquals(c.getCommandValue(), Command.CommandValue.PROCESS);
+		assertEquals(c.getCommand(), Command.CommandValue.PROCESS);
 	}
 	
 	/**
