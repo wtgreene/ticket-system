@@ -3,6 +3,8 @@
  */
 package edu.ncsu.csc216.ticket_manager.model.manager;
 
+import static org.junit.Assert.fail;
+
 import org.junit.Test;
 
 /**
@@ -17,7 +19,7 @@ public class TicketManagerTest {
 	 */
 	@Test
 	public void testTicketManager() {
-		
+		fail();
 	}
 	
 	/**
@@ -25,7 +27,7 @@ public class TicketManagerTest {
 	 */
 	@Test
 	public void testGetInstance() {
-		
+		fail();
 	}
 	
 	/**
@@ -33,7 +35,7 @@ public class TicketManagerTest {
 	 */
 	@Test
 	public void testSaveTicketsToFile() {
-		
+		fail();
 	}
 	
 	/**
@@ -41,7 +43,7 @@ public class TicketManagerTest {
 	 */
 	@Test
 	public void testLoadTicketsFromFile() {
-		
+		fail();
 	}
 	
 	/**
@@ -49,7 +51,7 @@ public class TicketManagerTest {
 	 */
 	@Test
 	public void testCreateNewTicketList() {
-		
+		fail();
 	}
 	
 	/**
@@ -57,7 +59,7 @@ public class TicketManagerTest {
 	 */
 	@Test
 	public void testGetTicketsForDisplay() {
-		
+		fail();
 	}
 	
 	/**
@@ -65,7 +67,7 @@ public class TicketManagerTest {
 	 */
 	@Test
 	public void testGetTicketsForDisplayByType() {
-		
+		fail();
 	}
 	
 	/**
@@ -73,7 +75,7 @@ public class TicketManagerTest {
 	 */
 	@Test
 	public void testGetTicketById() {
-		
+		fail();
 	}
 	
 	/**
@@ -81,7 +83,7 @@ public class TicketManagerTest {
 	 */
 	@Test
 	public void testExecuteCommand() {
-		
+		fail();
 	}
 	
 	/**
@@ -89,7 +91,7 @@ public class TicketManagerTest {
 	 */
 	@Test
 	public void testDeleteTicketById() {
-		
+		fail();
 	}
 	
 	/**
@@ -97,6 +99,6 @@ public class TicketManagerTest {
 	 */
 	@Test
 	public void testAddTicketToList() {
-		
+		fail();
 	}
 }

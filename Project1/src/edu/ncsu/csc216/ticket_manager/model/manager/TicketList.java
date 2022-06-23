@@ -18,14 +18,13 @@ import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.TicketType;
  */
 public class TicketList {
 	
-	/** ticket list */
 //	private ArrayList<Ticket> tickets;
 	
 	/**
 	 * Constructs a TicketList.
 	 */
 	public TicketList() {
-		
+		// constructor
 	}
 
 	/**
@@ -49,7 +48,7 @@ public class TicketList {
 	 * @param ticketList list of tickets to add
 	 */
 	public void addTickets(ArrayList<Ticket> ticketList) {
-		
+		// add
 	}
 	
 	/**
@@ -88,7 +87,7 @@ public class TicketList {
 	 * @param command command to change ticket characteristic
 	 */
 	public void executeCommand(int ticketId, Command command) {
-		
+		// execute
 	}
 	
 	/**
@@ -97,6 +96,6 @@ public class TicketList {
 	 * @param ticketId ticket id of the ticket to delete
 	 */
 	public void deleteTicketById(int ticketId) {
-		
+		// delete
 	}
 }

@@ -16,7 +16,7 @@ import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.TicketType;
  */
 public class TicketManager {
 	
-	/* ticket list */
+	/** ticket list */
 	private TicketList ticketList;
 	
 	/**
@@ -41,7 +41,7 @@ public class TicketManager {
 	 * @param filename file to save tickets to
 	 */
 	public void saveTicketsToFile(String filename) {
-		
+		// save
 	}
 	
 	/**
@@ -50,14 +50,14 @@ public class TicketManager {
 	 * @param filename file to read tickets from
 	 */
 	public void loadTicketsFromFile(String filename) {
-		
+		// load
 	}
 	
 	/**
 	 * Creates a new ticket list.
 	 */
 	public void createNewTicketList() {
-		
+		// create
 	}
 	
 	/**
@@ -96,7 +96,7 @@ public class TicketManager {
 	 * @param command command to change ticket characteristic
 	 */
 	public void executeCommand(int ticketId, Command command) {
-		
+		// execute
 	}
 	
 	/**
@@ -105,7 +105,7 @@ public class TicketManager {
 	 * @param ticketId ticket id
 	 */
 	public void deleteTicketById(int ticketId) {
-		
+		// delete
 	}
 	
 	/**
@@ -119,6 +119,6 @@ public class TicketManager {
 	 * @param note ticket note(s)
 	 */
 	public void addTicketToList(TicketType ticketType, String subject, String caller, Category category, Priority priority, String note) {
-		
+		// add
 	}
 }

@@ -62,9 +62,9 @@ public class Command {
 	 * 
 	 * @param c command
 	 * @param ownerId owner id
-	 * @param feedback FeedbackCode
-	 * @param resolution ResolutionCode
-	 * @param cancellation CancellationCode
+	 * @param feedbackCode FeedbackCode
+	 * @param resolutinoCode ResolutionCode
+	 * @param cancellationCode CancellationCode
 	 * @param note note
 	 * @throws IllegalArugmentException if parameters are invalid in one of the 6 ways below
 	 */

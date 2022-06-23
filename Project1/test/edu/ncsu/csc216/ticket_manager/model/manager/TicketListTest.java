@@ -3,6 +3,7 @@
  */
 package edu.ncsu.csc216.ticket_manager.model.manager;
 
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import org.junit.Test;
@@ -29,7 +30,7 @@ public class TicketListTest {
 	 */
 	@Test
 	public void testAddTicket() {
-		
+		fail();
 	}
 	
 	/**
@@ -37,7 +38,7 @@ public class TicketListTest {
 	 */
 	@Test
 	public void testAddTickets() {
-		
+		fail();
 	}
 	
 	/**
@@ -45,7 +46,7 @@ public class TicketListTest {
 	 */
 	@Test
 	public void testGetTickets() {
-		
+		fail();
 	}
 	
 	/**
@@ -53,7 +54,7 @@ public class TicketListTest {
 	 */
 	@Test
 	public void testGetTicketsByType() {
-		
+		fail();
 	}
 	
 	/**
@@ -61,7 +62,7 @@ public class TicketListTest {
 	 */
 	@Test
 	public void testGetTicketById() {
-		
+		fail();
 	}
 	
 	/**
@@ -69,7 +70,7 @@ public class TicketListTest {
 	 */
 	@Test
 	public void testExecuteCommand() {
-		
+		fail();
 	}
 	
 	/**
@@ -77,6 +78,6 @@ public class TicketListTest {
 	 */
 	@Test
 	public void testDeleteTicketById() {
-		
+		fail();
 	}
 }

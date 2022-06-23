@@ -3,6 +3,8 @@
  */
 package edu.ncsu.csc216.ticket_manager.model.ticket;
 
+import static org.junit.Assert.fail;
+
 import org.junit.Test;
 
 /**
@@ -17,7 +19,7 @@ public class TicketTest {
 	 */
 	@Test
 	public void testTicketIntStringStringStringStringStringStringStringStringArrayListString() {
-		
+		fail();
 	}
 	
 	/**
@@ -25,7 +27,7 @@ public class TicketTest {
 	 */
 	@Test
 	public void testTicketTicketTypeStringStringCategoryPriorityString() {
-		
+		fail();
 	}
 	
 	/**
@@ -33,7 +35,7 @@ public class TicketTest {
 	 */
 	@Test
 	public void testIncrementcounter() {
-		
+		fail();
 	}
 	
 	/**
@@ -41,7 +43,7 @@ public class TicketTest {
 	 */
 	@Test
 	public void testSetCounter() {
-		
+		fail();
 	}
 	
 	/**
@@ -49,7 +51,6 @@ public class TicketTest {
 	 */
 	@Test
 	public void testGetCaller() {
-		
+		fail();
 	}
-
 }
