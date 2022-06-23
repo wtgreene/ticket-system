@@ -49,7 +49,7 @@ public class Command {
 	private String note;
 		
 	/** command value */
-	private CommandValue commandValue;
+	private CommandValue c;
 	/** feedback code */
 	private FeedbackCode feedbackCode;
 	/** resolution code */
@@ -68,30 +68,30 @@ public class Command {
 	 * @param note note
 	 * @throws IllegalArugmentException if parameters are invalid in one of the 6 ways below
 	 */
-	public Command(CommandValue commandValue, String ownerId, FeedbackCode feedbackCode, ResolutionCode resolutionCode, CancellationCode cancellationCode, String note) {
+	public Command(CommandValue c, String ownerId, FeedbackCode feedbackCode, ResolutionCode resolutionCode, CancellationCode cancellationCode, String note) {
 		
 		// parameter error checking - null command
-		if (commandValue == null) {
+		if (c == null) {
 			throw new IllegalArgumentException("TODO");
 		}
 		
 		// parameter error checking - process command & null / empty owner id
-		if (commandValue == CommandValue.PROCESS && (ownerId == null || "".equals(ownerId))) {
+		if (c == CommandValue.PROCESS && (ownerId == null || "".equals(ownerId))) {
 			throw new IllegalArgumentException("TODO");
 		}
 		
 		// parameter error checking - feedback command & null / empty feedback code
-		if (commandValue == CommandValue.FEEDBACK && feedbackCode == null) {
+		if (c == CommandValue.FEEDBACK && feedbackCode == null) {
 			throw new IllegalArgumentException("TODO");
 		}
 		
 		// parameter error checking - resolve command & null / empty resolution code
-		if (commandValue == CommandValue.RESOLVE && resolutionCode == null) {
+		if (c == CommandValue.RESOLVE && resolutionCode == null) {
 			throw new IllegalArgumentException("TODO");
 		}
 		
 		// parameter error checking - cancel command & null / empty cancellation code
-		if (commandValue == CommandValue.CANCEL && cancellationCode == null) {
+		if (c == CommandValue.CANCEL && cancellationCode == null) {
 			throw new IllegalArgumentException("TODO");
 		}
 		
@@ -103,7 +103,7 @@ public class Command {
 		this.ownerId = ownerId;
 		this.note = note;
 		
-		this.commandValue = commandValue;
+		this.c = c;
 		this.feedbackCode = feedbackCode;
 		this.resolutionCode = resolutionCode;
 		this.cancellationCode = cancellationCode;
@@ -114,7 +114,7 @@ public class Command {
 	 * @return CommandValue.
 	 */
 	public CommandValue getCommandValue() {
-		return commandValue;
+		return c;
 	}
 	
 	/**
