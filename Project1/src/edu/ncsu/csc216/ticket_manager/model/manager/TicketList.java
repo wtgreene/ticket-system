@@ -19,14 +19,13 @@ import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.TicketType;
 public class TicketList {
 	
 	/** ticket list */
-	private ArrayList<Ticket> tickets;
+//	private ArrayList<Ticket> tickets;
 	
 	/**
 	 * Constructs a TicketList.
 	 */
 	public TicketList() {
-		tickets = new ArrayList<Ticket>();
-		Ticket.setCounter(1);
+		
 	}
 
 	/**
@@ -50,9 +49,7 @@ public class TicketList {
 	 * @param ticketList list of tickets to add
 	 */
 	public void addTickets(ArrayList<Ticket> ticketList) {
-		tickets = new ArrayList<Ticket>();
 		
-		// TODO
 	}
 	
 	/**
@@ -61,7 +58,7 @@ public class TicketList {
 	 * @return ticket list
 	 */
 	public ArrayList<Ticket> getTickets() {
-		return tickets;
+		return null;
 	}
 	
 	/**
@@ -90,7 +87,7 @@ public class TicketList {
 	 * @param ticketId ticket id
 	 * @param command command to change ticket characteristic
 	 */
-	public void excecuteCommand(int ticketId, Command command) {
+	public void executeCommand(int ticketId, Command command) {
 		
 	}
 	

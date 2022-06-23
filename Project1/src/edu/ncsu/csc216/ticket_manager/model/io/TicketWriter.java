@@ -3,7 +3,7 @@
  */
 package edu.ncsu.csc216.ticket_manager.model.io;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket;
 
@@ -21,7 +21,7 @@ public class TicketWriter {
 	 * @param ticketList ArrayList of tickets
 	 * @throws IllegalArgumentException if errors result from writing to the file
 	 */
-	public static void writeTicketFile(String filename, ArrayList<Ticket> ticketList) {
+	public static void writeTicketFile(String filename, List<Ticket> ticketList) {
 		// use Ticket.toString()
 		
 //		if (/*errors*/) {
