@@ -60,7 +60,7 @@ public class Command {
 	/**
 	 * Constructs a Command object.
 	 * 
-	 * @param command command
+	 * @param c command
 	 * @param ownerId owner id
 	 * @param feedback FeedbackCode
 	 * @param resolution ResolutionCode
@@ -113,7 +113,7 @@ public class Command {
 	 * Returns CommandValue.
 	 * @return CommandValue.
 	 */
-	public CommandValue getCommandValue() {
+	public CommandValue getCommand() {
 		return c;
 	}
 	
