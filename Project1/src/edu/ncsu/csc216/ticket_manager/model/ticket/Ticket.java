@@ -655,7 +655,7 @@ public class Ticket {
 	/**
 	 * not sure.
 	 * 
-	 * @param command
+	 * @param command command to change ticket state
 	 */
 	public void update(Command command) {
 		
@@ -715,6 +715,9 @@ public class Ticket {
 			break;
 		case CANCELED_NAME :
 			s2 = getCancellationCode();
+			
+		default:
+			break;
 		}
 		
 		String s3 = getNotes();
@@ -775,7 +778,7 @@ public class Ticket {
 	}
 	
 	/**
-	 * Ticket state representing a new ticket.
+	 * Ticket state representing a working ticket.
 	 * 
 	 * @author Will Greene
 	 */
@@ -826,7 +829,7 @@ public class Ticket {
 	}
 	
 	/**
-	 * Ticket state representing a new ticket.
+	 * Ticket state representing a feedback ticket.
 	 * 
 	 * @author Will Greene
 	 */
@@ -877,7 +880,7 @@ public class Ticket {
 	}
 	
 	/**
-	 * Ticket state representing a new ticket.
+	 * Ticket state representing a resolved ticket.
 	 * 
 	 * @author Will Greene
 	 */
@@ -928,7 +931,7 @@ public class Ticket {
 	}
 	
 	/**
-	 * Ticket state representing a new ticket.
+	 * Ticket state representing a closed ticket.
 	 * 
 	 * @author Will Greene
 	 */
@@ -979,7 +982,7 @@ public class Ticket {
 	}
 	
 	/**
-	 * Ticket state representing a new ticket.
+	 * Ticket state representing a canceled ticket.
 	 * 
 	 * @author Will Greene
 	 */
