@@ -47,22 +47,20 @@ public class Command {
 	private String ownerId;
 	/** note */
 	private String note;
-	
-	// [part 1] not in UML diagram but would these be necessary?
-	
+		
 	/** command value */
-	private CommandValue command;
+	private CommandValue commandValue;
 	/** feedback code */
-	private FeedbackCode feedback;
+	private FeedbackCode feedbackCode;
 	/** resolution code */
-	private ResolutionCode resolution;
+	private ResolutionCode resolutionCode;
 	/** cancellation code */
-	private CancellationCode cancellation;
+	private CancellationCode cancellationCode;
 	
 	/**
 	 * Constructs a Command object.
 	 * 
-	 * @param command c
+	 * @param command command
 	 * @param ownerId owner id
 	 * @param feedback FeedbackCode
 	 * @param resolution ResolutionCode
@@ -70,30 +68,30 @@ public class Command {
 	 * @param note note
 	 * @throws IllegalArugmentException if parameters are invalid in one of the 6 ways below
 	 */
-	public Command(CommandValue command, String ownerId, FeedbackCode feedback, ResolutionCode resolution, CancellationCode cancellation, String note) {
+	public Command(CommandValue commandValue, String ownerId, FeedbackCode feedbackCode, ResolutionCode resolutionCode, CancellationCode cancellationCode, String note) {
 		
 		// parameter error checking - null command
-		if (command == null) {
+		if (commandValue == null) {
 			throw new IllegalArgumentException("TODO");
 		}
 		
 		// parameter error checking - process command & null / empty owner id
-		if (command == CommandValue.PROCESS && (ownerId == null || "".equals(ownerId))) {
+		if (commandValue == CommandValue.PROCESS && (ownerId == null || "".equals(ownerId))) {
 			throw new IllegalArgumentException("TODO");
 		}
 		
 		// parameter error checking - feedback command & null / empty feedback code
-		if (command == CommandValue.FEEDBACK && feedback == null) {
+		if (commandValue == CommandValue.FEEDBACK && feedbackCode == null) {
 			throw new IllegalArgumentException("TODO");
 		}
 		
 		// parameter error checking - resolve command & null / empty resolution code
-		if (command == CommandValue.RESOLVE && resolution == null) {
+		if (commandValue == CommandValue.RESOLVE && resolutionCode == null) {
 			throw new IllegalArgumentException("TODO");
 		}
 		
 		// parameter error checking - cancel command & null / empty cancellation code
-		if (command == CommandValue.CANCEL && cancellation == null) {
+		if (commandValue == CommandValue.CANCEL && cancellationCode == null) {
 			throw new IllegalArgumentException("TODO");
 		}
 		
@@ -105,12 +103,10 @@ public class Command {
 		this.ownerId = ownerId;
 		this.note = note;
 		
-		// [part 2] not in UML diagram but would these be necessary?
-		// also, should setters be used for this class?
-		this.command = command;
-		this.feedback = feedback;
-		this.resolution = resolution;
-		this.cancellation = cancellation;
+		this.commandValue = commandValue;
+		this.feedbackCode = feedbackCode;
+		this.resolutionCode = resolutionCode;
+		this.cancellationCode = cancellationCode;
 	}
 	
 	/**
@@ -118,7 +114,7 @@ public class Command {
 	 * @return CommandValue.
 	 */
 	public CommandValue getCommandValue() {
-		return command;
+		return commandValue;
 	}
 	
 	/**
@@ -134,7 +130,7 @@ public class Command {
 	 * @return ResolutionCode
 	 */
 	public ResolutionCode getResolutionCode() {
-		return resolution;
+		return resolutionCode;
 	}
 	
 	/**
@@ -150,7 +146,7 @@ public class Command {
 	 * @return FeedbackCode
 	 */
 	public FeedbackCode getFeedbackCode() {
-		return feedback;
+		return feedbackCode;
 	}
 
 	/**
@@ -158,6 +154,6 @@ public class Command {
 	 * @return CancellationCode
 	 */
 	public CancellationCode getCancellationCode() {
-		return cancellation;
+		return cancellationCode;
 	}
 }
