@@ -91,7 +91,7 @@ public class Ticket {
 	private TicketType ticketType;
 
 	/** ticket counter (for ticket id purposes) */
-	private static int counter;
+	private static int counter = 1;
 	/** ticket id */
 	private int ticketId;
 	/** ticket subject */
@@ -111,11 +111,18 @@ public class Ticket {
 	}
 
 	/**
-	 * Sets the initial counter to 1.
+	 * Sets the initial counter.
 	 * 
 	 * @param number number to begin counting with
+	 * @throws IllegalArgumentException if invalid counter
 	 */
 	public static void setCounter(int number) {
+		
+		// parameter error checking - negative number, or zero
+		if (number < 1) {
+			throw new IllegalArgumentException("Invalid counter.");
+		}
+		
 		counter = number;
 	}
 
@@ -135,9 +142,7 @@ public class Ticket {
 	 */
 	public Ticket(int id, String state, String ticketType, String subject, String caller, String category,
 			String priority, String owner, String code, ArrayList<String> notes) {
-		
-		// THROW IAE's !!!
-	
+			
 		if (id > counter) {
 			setCounter(id + 1);
 		}
@@ -401,25 +406,7 @@ public class Ticket {
 	 * @return state
 	 */
 	public String getState() {
-		
-//		switch (state) { //TODO use instance of?
-//		
-//		case newState :
-//			return NEW_NAME;
-//		case workingState :
-//			return WORKING_NAME;
-//		case feedbackState :
-//			return FEEDBACK_NAME;
-//		case resolvedState :
-//			return RESOLVED_NAME;
-//		case closedState :
-//			return CLOSED_NAME;
-//		case canceledState :
-//			return CANCELED_NAME;
-//			
-//		default:
-			return null;
-//		}
+		return state.getStateName();
 	}
 
 	/**
@@ -468,8 +455,15 @@ public class Ticket {
 	 * Sets caller.
 	 * 
 	 * @param caller ticket caller
+	 * @throws IllegalArgumentException if invalid caller
 	 */
 	private void setCaller(String caller) {
+		
+		// parameter error checking - null or empty string
+		if (caller == null || "".equals(caller)) {
+			throw new IllegalArgumentException("Invalid caller.");
+		}
+		
 		this.caller = caller;
 	}
 
@@ -628,8 +622,15 @@ public class Ticket {
 	 * Sets subject.
 	 * 
 	 * @param subject ticket subject
+	 * @throws IllegalArgumentException if invalid subject
 	 */
 	private void setSubject(String subject) {
+		
+		// parameter error checking - null or empty string
+		if (subject == null || "".equals(subject)) {
+			throw new IllegalArgumentException("Invalid subject.");
+		}
+		
 		this.subject = subject;
 	}
 
@@ -653,41 +654,12 @@ public class Ticket {
 	}
 
 	/**
-	 * not sure.
+	 * Updates the Ticket state.
 	 * 
 	 * @param command command to change ticket state
 	 */
 	public void update(Command command) {
-		
 		state.updateState(command);
-		
-		// add "non-null" notes?
-		
-//		switch (command.getCommandValue()) {
-//		
-//		case PROCESS:
-//			state = workingState;
-//			owner = command.getOwnerId();
-//			break;
-//		case REOPEN:
-//			state = workingState;
-//			break;
-//		case FEEDBACK:
-//			state = feedbackState;
-//			break;
-//		case RESOLVE:
-//			state = resolvedState;
-//			break;
-//		case CONFIRM:
-//			state = closedState;
-//			break;
-//		case CANCEL:
-//			state = canceledState;
-//			break;
-//			
-//		default:
-//			break;
-//		}
 	}
 
 	/**
@@ -745,22 +717,19 @@ public class Ticket {
 			
 			case PROCESS:
 				state = workingState;
-				owner = null; //TODO
+				owner = command.getOwnerId();
 				break;
 			case REOPEN:
-				state = workingState;
-				break;
+				throw new UnsupportedOperationException("");
 			case FEEDBACK:
-				state = feedbackState;
-				break;
+				throw new UnsupportedOperationException("");
 			case RESOLVE:
-				state = resolvedState;
-				break;
+				throw new UnsupportedOperationException("");
 			case CONFIRM:
-				state = closedState;
-				break;
+				throw new UnsupportedOperationException("");
 			case CANCEL:
 				state = canceledState;
+				cancellationCode = command.getCancellationCode();
 				break;
 			default:
 				break;
@@ -792,30 +761,28 @@ public class Ticket {
 		@Override
 		public void updateState(Command command) {
 			
-//			switch (command.getCommandValue()) {
-//			
-//			case PROCESS:
-//				state = workingState;
-//				owner = null; //TODO
-//				break;
-//			case REOPEN:
-//				state = workingState;
-//				break;
-//			case FEEDBACK:
-//				state = feedbackState;
-//				break;
-//			case RESOLVE:
-//				state = resolvedState;
-//				break;
-//			case CONFIRM:
-//				state = closedState;
-//				break;
-//			case CANCEL:
-//				state = canceledState;
-//				break;
-//			default:
-//				break;
-//			}
+			switch (command.getCommand()) {
+			
+			case PROCESS:
+				throw new UnsupportedOperationException("");
+			case REOPEN:
+				throw new UnsupportedOperationException("");
+			case FEEDBACK:
+				state = feedbackState;
+				feedbackCode = command.getFeedbackCode();
+				break;
+			case RESOLVE:
+				state = resolvedState;
+				resolutionCode = command.getResolutionCode();
+			case CONFIRM:
+				throw new UnsupportedOperationException("");
+			case CANCEL:
+				state = canceledState;
+				cancellationCode = command.getCancellationCode();
+				break;
+			default:
+				break;
+			}
 		}
 		
 		/**
@@ -824,7 +791,7 @@ public class Ticket {
 		 */
 		@Override
 		public String getStateName() {
-			return NEW_NAME;
+			return WORKING_NAME;
 		}
 	}
 	
@@ -843,30 +810,29 @@ public class Ticket {
 		@Override
 		public void updateState(Command command) {
 			
-//			switch (command.getCommandValue()) {
-//			
-//			case PROCESS:
-//				state = workingState;
-//				owner = null; //TODO
-//				break;
-//			case REOPEN:
-//				state = workingState;
-//				break;
-//			case FEEDBACK:
-//				state = feedbackState;
-//				break;
-//			case RESOLVE:
-//				state = resolvedState;
-//				break;
-//			case CONFIRM:
-//				state = closedState;
-//				break;
-//			case CANCEL:
-//				state = canceledState;
-//				break;
-//			default:
-//				break;
-//			}
+			switch (command.getCommand()) {
+			
+			case PROCESS:
+				state = workingState;
+				break;
+			case REOPEN:
+				throw new UnsupportedOperationException("");
+			case FEEDBACK:
+				state = feedbackState;
+				feedbackCode = command.getFeedbackCode();
+				break;
+			case RESOLVE:
+				state = resolvedState;
+				resolutionCode = command.getResolutionCode();
+			case CONFIRM:
+				throw new UnsupportedOperationException("");
+			case CANCEL:
+				state = canceledState;
+				cancellationCode = command.getCancellationCode();
+				break;
+			default:
+				break;
+			}
 		}
 		
 		/**
@@ -875,7 +841,7 @@ public class Ticket {
 		 */
 		@Override
 		public String getStateName() {
-			return NEW_NAME;
+			return FEEDBACK_NAME;
 		}
 	}
 	
@@ -894,30 +860,27 @@ public class Ticket {
 		@Override
 		public void updateState(Command command) {
 			
-//			switch (command.getCommandValue()) {
-//			
-//			case PROCESS:
-//				state = workingState;
-//				owner = null; //TODO
-//				break;
-//			case REOPEN:
-//				state = workingState;
-//				break;
-//			case FEEDBACK:
-//				state = feedbackState;
-//				break;
-//			case RESOLVE:
-//				state = resolvedState;
-//				break;
-//			case CONFIRM:
-//				state = closedState;
-//				break;
-//			case CANCEL:
-//				state = canceledState;
-//				break;
-//			default:
-//				break;
-//			}
+			switch (command.getCommand()) {
+			
+			case PROCESS:
+				state = workingState;
+				break;
+			case REOPEN:
+				throw new UnsupportedOperationException("");
+			case FEEDBACK:
+				state = feedbackState;
+				feedbackCode = command.getFeedbackCode();
+				break;
+			case RESOLVE:
+				throw new UnsupportedOperationException("");
+			case CONFIRM:
+				state = closedState;
+				break;
+			case CANCEL:
+				throw new UnsupportedOperationException("");
+			default:
+				break;
+			}
 		}
 		
 		/**
@@ -926,7 +889,7 @@ public class Ticket {
 		 */
 		@Override
 		public String getStateName() {
-			return NEW_NAME;
+			return RESOLVED_NAME;
 		}
 	}
 	
@@ -945,30 +908,23 @@ public class Ticket {
 		@Override
 		public void updateState(Command command) {
 			
-//			switch (command.getCommandValue()) {
-//			
-//			case PROCESS:
-//				state = workingState;
-//				owner = null; //TODO
-//				break;
-//			case REOPEN:
-//				state = workingState;
-//				break;
-//			case FEEDBACK:
-//				state = feedbackState;
-//				break;
-//			case RESOLVE:
-//				state = resolvedState;
-//				break;
-//			case CONFIRM:
-//				state = closedState;
-//				break;
-//			case CANCEL:
-//				state = canceledState;
-//				break;
-//			default:
-//				break;
-//			}
+			switch (command.getCommand()) {
+			
+			case PROCESS:
+				throw new UnsupportedOperationException("");
+			case REOPEN:
+				state = workingState;
+			case FEEDBACK:
+				throw new UnsupportedOperationException("");
+			case RESOLVE:
+				throw new UnsupportedOperationException("");
+			case CONFIRM:
+				throw new UnsupportedOperationException("");
+			case CANCEL:
+				throw new UnsupportedOperationException("");
+			default:
+				break;
+			}
 		}
 		
 		/**
@@ -977,7 +933,7 @@ public class Ticket {
 		 */
 		@Override
 		public String getStateName() {
-			return NEW_NAME;
+			return CLOSED_NAME;
 		}
 	}
 	
@@ -996,30 +952,30 @@ public class Ticket {
 		@Override
 		public void updateState(Command command) {
 			
-//			switch (command.getCommandValue()) {
-//			
-//			case PROCESS:
-//				state = workingState;
-//				owner = null; //TODO
-//				break;
-//			case REOPEN:
-//				state = workingState;
-//				break;
-//			case FEEDBACK:
-//				state = feedbackState;
-//				break;
-//			case RESOLVE:
-//				state = resolvedState;
-//				break;
-//			case CONFIRM:
-//				state = closedState;
-//				break;
-//			case CANCEL:
-//				state = canceledState;
-//				break;
-//			default:
-//				break;
-//			}
+			switch (command.getCommand()) {
+			
+			case PROCESS:
+				state = workingState;
+				owner = command.getOwnerId();
+				break;
+			case REOPEN:
+				throw new UnsupportedOperationException("");
+			case FEEDBACK:
+				state = feedbackState;
+				feedbackCode = command.getFeedbackCode();
+				break;
+			case RESOLVE:
+				state = resolvedState;
+				resolutionCode = command.getResolutionCode();
+			case CONFIRM:
+				throw new UnsupportedOperationException("");
+			case CANCEL:
+				state = canceledState;
+				cancellationCode = command.getCancellationCode();
+				break;
+			default:
+				break;
+			}
 		}
 		
 		/**
@@ -1028,7 +984,7 @@ public class Ticket {
 		 */
 		@Override
 		public String getStateName() {
-			return NEW_NAME;
+			return CANCELED_NAME;
 		}
 	}
 }

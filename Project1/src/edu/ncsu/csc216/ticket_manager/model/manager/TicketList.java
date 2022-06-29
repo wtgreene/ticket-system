@@ -18,13 +18,15 @@ import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.TicketType;
  */
 public class TicketList {
 	
-//	private ArrayList<Ticket> tickets;
+	/** ticket list */
+	private ArrayList<Ticket> tickets;
 	
 	/**
 	 * Constructs a TicketList.
 	 */
 	public TicketList() {
-		// constructor
+		tickets = new ArrayList<Ticket>();
+		Ticket.setCounter(1);
 	}
 
 	/**
@@ -39,7 +41,10 @@ public class TicketList {
 	 * @return what does this return ? TODO
 	 */
 	public int addTicket(TicketType ticketType, String subject, String caller, Category category, Priority priority, String note) {
-		return 0;
+		Ticket t = new Ticket(ticketType, subject, caller, category, priority, note);
+		tickets.add(t);
+		Ticket.incrementCounter();
+		return 1;
 	}
 	
 	/**
@@ -48,7 +53,11 @@ public class TicketList {
 	 * @param ticketList list of tickets to add
 	 */
 	public void addTickets(ArrayList<Ticket> ticketList) {
-		// add
+		tickets = new ArrayList<Ticket>();
+		
+		for (int i = 0; i < ticketList.size(); i++) {
+			tickets.add(ticketList.get(i));
+		}
 	}
 	
 	/**
@@ -57,7 +66,7 @@ public class TicketList {
 	 * @return ticket list
 	 */
 	public ArrayList<Ticket> getTickets() {
-		return null;
+		return tickets;
 	}
 	
 	/**
@@ -67,7 +76,15 @@ public class TicketList {
 	 * @return ticket list by ticket type
 	 */
 	public ArrayList<Ticket> getTicketsByType(TicketType ticketType) {
-		return null;
+		ArrayList<Ticket> t = new ArrayList<Ticket>();
+		
+		for (int i = 0; i < tickets.size(); i++) {
+			if (tickets.get(i).getTicketType().equals(ticketType)) {
+				t.add(tickets.get(i));
+			}
+		}
+		
+		return t;
 	}
 	
 	/**
@@ -77,7 +94,13 @@ public class TicketList {
 	 * @return a specified ticket
 	 */
 	public Ticket getTicketById(int ticketId) {
-		return null;
+		for (int i = 0; i < tickets.size(); i++) {
+			if (tickets.get(i).getTicketId() == ticketId) {
+				return tickets.get(i);
+			}
+		}
+		
+		return null; // Or IAE
 	}
 	
 	/**
@@ -87,7 +110,7 @@ public class TicketList {
 	 * @param command command to change ticket characteristic
 	 */
 	public void executeCommand(int ticketId, Command command) {
-		// execute
+		getTicketById(ticketId).update(command);
 	}
 	
 	/**
@@ -96,6 +119,10 @@ public class TicketList {
 	 * @param ticketId ticket id of the ticket to delete
 	 */
 	public void deleteTicketById(int ticketId) {
-		// delete
+		for (int i = 0; i < tickets.size(); i++) {
+			if (tickets.get(i).getTicketId() == ticketId) {
+				tickets.remove(i);
+			}
+		}
 	}
 }

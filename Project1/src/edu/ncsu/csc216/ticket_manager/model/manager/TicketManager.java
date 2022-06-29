@@ -4,6 +4,8 @@
 package edu.ncsu.csc216.ticket_manager.model.manager;
 
 import edu.ncsu.csc216.ticket_manager.model.command.Command;
+import edu.ncsu.csc216.ticket_manager.model.io.TicketReader;
+import edu.ncsu.csc216.ticket_manager.model.io.TicketWriter;
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket;
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Category;
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Priority;
@@ -19,6 +21,9 @@ public class TicketManager {
 	/** ticket list */
 	private TicketList ticketList;
 	
+	/** instance of the TicketManager */
+	private static TicketManager instance;
+	
 	/**
 	 * Constructs a TicketManager.
 	 */
@@ -32,7 +37,11 @@ public class TicketManager {
 	 * @return an instance of TicketManager
 	 */
 	public static TicketManager getInstance() {
-		return null;
+		 if (instance == null) {
+			instance = new TicketManager();
+		}
+		
+		return instance;
 	}
 	
 	/**
@@ -41,7 +50,7 @@ public class TicketManager {
 	 * @param filename file to save tickets to
 	 */
 	public void saveTicketsToFile(String filename) {
-		// save
+		TicketWriter.writeTicketFile(filename, ticketList.getTickets());
 	}
 	
 	/**
@@ -50,14 +59,15 @@ public class TicketManager {
 	 * @param filename file to read tickets from
 	 */
 	public void loadTicketsFromFile(String filename) {
-		// load
+		TicketReader.readTicketFile(filename);
+		Ticket.setCounter(ticketList.getTickets().size());
 	}
 	
 	/**
 	 * Creates a new ticket list.
 	 */
 	public void createNewTicketList() {
-		// create
+		ticketList = new TicketList();
 	}
 	
 	/**
@@ -66,7 +76,20 @@ public class TicketManager {
 	 * @return a String array of tickets
 	 */
 	public String[][] getTicketsForDisplay() {
-		return null;
+		String[][] s = new String[ticketList.getTickets().size()][6];
+		
+		for (int i = 0; i < ticketList.getTickets().size(); i++) {
+			Ticket t = ticketList.getTickets().get(i);
+			
+			s[i][0] = Integer.toString(t.getTicketId());
+			s[i][1] = t.getTicketTypeString();
+			s[i][2] = t.getState();
+			s[i][3] = t.getSubject();
+			s[i][4] = t.getCategory();
+			s[i][5] = t.getPriority();
+		}
+		
+		return s;
 	}
 	
 	/**
@@ -76,7 +99,30 @@ public class TicketManager {
 	 * @return a String array of tickets by ticket type
 	 */
 	public String[][] getTicketsForDisplayByType(TicketType ticketType) {
-		return null;
+		int counter = 0;
+		
+		for (int i = 0; i < ticketList.getTickets().size(); i++) {
+			if (ticketList.getTickets().get(i).getTicketType() == ticketType) {
+				counter++;
+			}
+		}
+		
+		String[][] s = new String[counter][6];
+		
+		for (int i = 0; i < ticketList.getTickets().size(); i++) {
+			if (ticketList.getTickets().get(i).getTicketType() == ticketType) {
+				Ticket t = ticketList.getTickets().get(i);
+				
+				s[i][0] = Integer.toString(t.getTicketId());
+				s[i][1] = t.getTicketTypeString();
+				s[i][2] = t.getState();
+				s[i][3] = t.getSubject();
+				s[i][4] = t.getCategory();
+				s[i][5] = t.getPriority();
+			}
+		}
+		
+		return s;
 	}
 	
 	/**
@@ -86,7 +132,7 @@ public class TicketManager {
 	 * @return a specified ticket
 	 */
 	public Ticket getTicketById(int ticketId) {
-		return ticketList.getTicketById(ticketId - 1);
+		return ticketList.getTicketById(ticketId);
 	}
 	
 	/**
@@ -96,7 +142,7 @@ public class TicketManager {
 	 * @param command command to change ticket characteristic
 	 */
 	public void executeCommand(int ticketId, Command command) {
-		// execute
+		ticketList.executeCommand(ticketId, command);
 	}
 	
 	/**
@@ -105,7 +151,7 @@ public class TicketManager {
 	 * @param ticketId ticket id
 	 */
 	public void deleteTicketById(int ticketId) {
-		// delete
+		ticketList.deleteTicketById(ticketId);
 	}
 	
 	/**
@@ -119,6 +165,6 @@ public class TicketManager {
 	 * @param note ticket note(s)
 	 */
 	public void addTicketToList(TicketType ticketType, String subject, String caller, Category category, Priority priority, String note) {
-		// add
+		ticketList.addTicket(ticketType, subject, caller, category, priority, note);
 	}
 }

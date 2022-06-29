@@ -26,5 +26,4 @@ public interface TicketState {
 	 * @return the name of the current state as a String.
 	 */
 	String getStateName();
-
 }
