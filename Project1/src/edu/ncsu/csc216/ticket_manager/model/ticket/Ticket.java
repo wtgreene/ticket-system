@@ -180,7 +180,7 @@ public class Ticket {
 		Ticket.incrementCounter();
 		
 		if (ticketType == null) {
-			throw new IllegalArgumentException("TODO");
+			throw new IllegalArgumentException("Invalid ticket type.");
 		}
 		
 		switch (ticketType) {
@@ -200,7 +200,7 @@ public class Ticket {
 		setCaller(caller);
 		
 		if (category == null) {
-			throw new IllegalArgumentException("TODO");
+			throw new IllegalArgumentException("Invalid category.");
 		}
 		
 		switch (category) {
@@ -226,7 +226,7 @@ public class Ticket {
 		}
 		
 		if (priority == null) {
-			throw new IllegalArgumentException("TODO");
+			throw new IllegalArgumentException("Invalid priority.");
 		}
 		
 		switch (priority) {
@@ -470,7 +470,7 @@ public class Ticket {
 	 */
 	private void setCancellationCode(String cancellationCode) {
 		
-		if (cancellationCode == null) {
+		if (cancellationCode == null || "".equals(cancellationCode)) {
 			this.cancellationCode = null;
 		}
 		
@@ -498,6 +498,10 @@ public class Ticket {
 	 * @param category ticket category
 	 */
 	private void setCategory(String category) {
+		
+		if (category == null || "".equals(category)) {
+			throw new IllegalArgumentException("Invalid category.");
+		}
 		
 		switch (category) {
 		
@@ -538,7 +542,7 @@ public class Ticket {
 	 */
 	private void setFeedbackCode(String feedbackCode) {
 		
-		if (feedbackCode == null) {
+		if (feedbackCode == null || "".equals(feedbackCode)) {
 			this.feedbackCode = null;
 		}
 		
@@ -557,6 +561,7 @@ public class Ticket {
 				break;
 
 			default:
+				this.feedbackCode = null;
 				break;
 			}
 		}
@@ -568,6 +573,10 @@ public class Ticket {
 	 * @param priority ticket priority
 	 */
 	private void setPriority(String priority) {
+		
+		if (priority == null || "".equals(priority)) {
+			throw new IllegalArgumentException("Invalid priority.");
+		}
 		
 		switch (priority) {
 		
@@ -596,7 +605,7 @@ public class Ticket {
 	 */
 	private void setResolutionCode(String resolutionCode) {
 		
-		if (resolutionCode == null) {
+		if (resolutionCode == null || "".equals(resolutionCode)) {
 			this.resolutionCode = null;
 		}
 		
@@ -624,6 +633,7 @@ public class Ticket {
 				break;
 
 			default:
+				this.resolutionCode = null;
 				break;
 			}
 		}
@@ -635,6 +645,10 @@ public class Ticket {
 	 * @param state ticket state
 	 */
 	private void setState(String state) {
+		
+		if (state == null || "".equals(state)) {
+			throw new IllegalArgumentException("Invalid state.");
+		}
 		
 		switch (state) {
 		
@@ -684,6 +698,10 @@ public class Ticket {
 	 * @param ticketType ticket type
 	 */
 	private void setTicketType(String ticketType) {
+		
+		if (ticketType == null || "".equals(ticketType)) {
+			throw new IllegalArgumentException("Invalid ticket type.");
+		}
 		
 		switch (ticketType) {
 		
@@ -826,8 +844,9 @@ public class Ticket {
 			case RESOLVE:
 				state = resolvedState;
 				resolutionCode = command.getResolutionCode();
+				break;
 			case CONFIRM:
-				state = closedState;
+				throw new UnsupportedOperationException("");
 			case CANCEL:
 				state = canceledState;
 				cancellationCode = command.getCancellationCode();
@@ -870,9 +889,7 @@ public class Ticket {
 			case REOPEN:
 				throw new UnsupportedOperationException("");
 			case FEEDBACK:
-				state = feedbackState;
-				feedbackCode = command.getFeedbackCode();
-				break;
+				throw new UnsupportedOperationException("");
 			case RESOLVE:
 				state = resolvedState;
 				resolutionCode = command.getResolutionCode();
@@ -1009,25 +1026,17 @@ public class Ticket {
 			switch (command.getCommand()) {
 			
 			case PROCESS:
-				state = workingState;
-				owner = command.getOwnerId();
-				break;
+				throw new UnsupportedOperationException("");
 			case REOPEN:
 				throw new UnsupportedOperationException("");
 			case FEEDBACK:
-				state = feedbackState;
-				feedbackCode = command.getFeedbackCode();
-				break;
+				throw new UnsupportedOperationException("");
 			case RESOLVE:
-				state = resolvedState;
-				resolutionCode = command.getResolutionCode();
-				break;
+				throw new UnsupportedOperationException("");
 			case CONFIRM:
 				throw new UnsupportedOperationException("");
 			case CANCEL:
-				state = canceledState;
-				cancellationCode = command.getCancellationCode();
-				break;
+				throw new UnsupportedOperationException("");
 			default:
 				break;
 			}

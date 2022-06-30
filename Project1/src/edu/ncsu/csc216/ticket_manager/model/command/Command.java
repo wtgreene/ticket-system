@@ -41,7 +41,7 @@ public class Command {
 	/** cancellation code for duplicate */
 	public static final String CC_DUPLICATE = "Duplicate";
 	/** cancellation code for inappropriate */
-	public static final String CC_INAPPROPRIATE = "Inapproriate";
+	public static final String CC_INAPPROPRIATE = "Inappropriate";
 	
 	/** owner id */
 	private String ownerId;

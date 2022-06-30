@@ -78,7 +78,16 @@ public class TicketTest {
 	 */
 	@Test
 	public void testTicketTicketTypeStringStringCategoryPriorityString() {
-		assertDoesNotThrow(() -> new Ticket(TICKET_TYPE, SUBJECT, CALLER, CATEGORY, PRIORITY, NOTE));
+		assertDoesNotThrow(() -> new Ticket(TICKET_TYPE, SUBJECT, CALLER, CATEGORY, Priority.LOW, NOTE));
+		assertDoesNotThrow(() -> new Ticket(TICKET_TYPE, SUBJECT, CALLER, CATEGORY, Priority.MEDIUM, NOTE));
+		assertDoesNotThrow(() -> new Ticket(TICKET_TYPE, SUBJECT, CALLER, CATEGORY, Priority.HIGH, NOTE));
+		assertDoesNotThrow(() -> new Ticket(TICKET_TYPE, SUBJECT, CALLER, CATEGORY, Priority.URGENT, NOTE));
+		
+		assertDoesNotThrow(() -> new Ticket(TICKET_TYPE, SUBJECT, CALLER, Category.DATABASE, PRIORITY, NOTE));
+		assertDoesNotThrow(() -> new Ticket(TICKET_TYPE, SUBJECT, CALLER, Category.HARDWARE, PRIORITY, NOTE));
+		assertDoesNotThrow(() -> new Ticket(TICKET_TYPE, SUBJECT, CALLER, Category.INQUIRY, PRIORITY, NOTE));
+		assertDoesNotThrow(() -> new Ticket(TICKET_TYPE, SUBJECT, CALLER, Category.NETWORK, PRIORITY, NOTE));
+		assertDoesNotThrow(() -> new Ticket(TICKET_TYPE, SUBJECT, CALLER, Category.SOFTWARE, PRIORITY, NOTE));
 	}
 	
 	/**
@@ -116,8 +125,10 @@ public class TicketTest {
 	 */
 	@Test
 	public void testGetCancellationCode() {
-		Ticket t = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, Command.CC_DUPLICATE, NOTES);
-		assertEquals(Command.CC_DUPLICATE, t.getCancellationCode());
+		Ticket t1 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, "Duplicate", NOTES);
+		Ticket t2 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, "Inappropriate", NOTES);
+		assertEquals("Duplicate", t1.getCancellationCode());
+		assertEquals("Inappropriate", t2.getCancellationCode());
 	}
 	
 	/**
@@ -125,8 +136,16 @@ public class TicketTest {
 	 */
 	@Test
 	public void testGetCategory() {
-		Ticket t = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
-		assertEquals(CATEGORY_STRING, t.getCategory());
+		Ticket t1 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, "Inquiry", PRIORITY_STRING, OWNER, CODE, NOTES);
+		Ticket t2 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, "Software", PRIORITY_STRING, OWNER, CODE, NOTES);
+		Ticket t3 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, "Hardware", PRIORITY_STRING, OWNER, CODE, NOTES);
+		Ticket t4 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, "Network", PRIORITY_STRING, OWNER, CODE, NOTES);
+		Ticket t5 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, "Database", PRIORITY_STRING, OWNER, CODE, NOTES);
+		assertEquals("Inquiry", t1.getCategory());
+		assertEquals("Software", t2.getCategory());
+		assertEquals("Hardware", t3.getCategory());
+		assertEquals("Network", t4.getCategory());
+		assertEquals("Database", t5.getCategory());
 	}
 	
 	/**
@@ -134,8 +153,12 @@ public class TicketTest {
 	 */
 	@Test
 	public void testGetFeedbackCode() {
-		Ticket t = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, Command.F_CALLER, NOTES);
-		assertEquals(Command.F_CALLER, t.getFeedbackCode());
+		Ticket t1 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, "Awaiting Caller", NOTES);
+		Ticket t2 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, "Awaiting Change", NOTES);
+		Ticket t3 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, "Awaiting Provider", NOTES);
+		assertEquals("Awaiting Caller", t1.getFeedbackCode());
+		assertEquals("Awaiting Change", t2.getFeedbackCode());
+		assertEquals("Awaiting Provider", t3.getFeedbackCode());
 	}
 	
 	/**
@@ -165,8 +188,14 @@ public class TicketTest {
 	 */
 	@Test
 	public void testGetPriority() {
-		Ticket t = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
-		assertEquals(PRIORITY_STRING, t.getPriority());
+		Ticket t1 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, "Low", OWNER, CODE, NOTES);
+		Ticket t2 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, "Medium", OWNER, CODE, NOTES);
+		Ticket t3 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, "High", OWNER, CODE, NOTES);
+		Ticket t4 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, "Urgent", OWNER, CODE, NOTES);
+		assertEquals("Low", t1.getPriority());
+		assertEquals("Medium", t2.getPriority());
+		assertEquals("High", t3.getPriority());
+		assertEquals("Urgent", t4.getPriority());
 	}
 	
 	/**
@@ -174,8 +203,18 @@ public class TicketTest {
 	 */
 	@Test
 	public void testGetResolutionCode() {
-		Ticket t = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, Command.RC_CALLER_CLOSED, NOTES);
-		assertEquals(Command.RC_CALLER_CLOSED, t.getResolutionCode());
+		Ticket t1 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, "Solved", NOTES);
+		Ticket t2 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, "Not Solved", NOTES);
+		Ticket t3 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, "Workaround", NOTES);
+		Ticket t4 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, "Caller Closed", NOTES);
+		Ticket t5 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, "Completed", NOTES);
+		Ticket t6 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, "Not Completed", NOTES);
+		assertEquals("Solved", t1.getResolutionCode());
+		assertEquals("Not Solved", t2.getResolutionCode());
+		assertEquals("Workaround", t3.getResolutionCode());
+		assertEquals("Caller Closed", t4.getResolutionCode());
+		assertEquals("Completed", t5.getResolutionCode());
+		assertEquals("Not Completed", t6.getResolutionCode());
 	}
 	
 	/**
@@ -183,8 +222,18 @@ public class TicketTest {
 	 */
 	@Test
 	public void testGetState() {
-		Ticket t = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
-		assertEquals(Ticket.NEW_NAME, t.getState());
+		Ticket t1 = new Ticket(ID, "New", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
+		Ticket t2 = new Ticket(ID, "Working", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
+		Ticket t3 = new Ticket(ID, "Feedback", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
+		Ticket t4 = new Ticket(ID, "Resolved", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
+		Ticket t5 = new Ticket(ID, "Closed", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
+		Ticket t6 = new Ticket(ID, "Cancelled", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
+		assertEquals("New", t1.getState());
+		assertEquals("Working", t2.getState());
+		assertEquals("Feedback", t3.getState());
+		assertEquals("Resolved", t4.getState());
+		assertEquals("Closed", t5.getState());
+		assertEquals("Cancelled", t6.getState());
 	}
 	
 	/**
@@ -210,8 +259,10 @@ public class TicketTest {
 	 */
 	@Test
 	public void testGetTicketType() {
-		Ticket t = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
-		assertEquals(TICKET_TYPE, t.getTicketType());
+		Ticket t1 = new Ticket(ID, STATE, "Incident", SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
+		Ticket t2 = new Ticket(ID, STATE, "Request", SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
+		assertEquals(TicketType.INCIDENT, t1.getTicketType());
+		assertEquals(TicketType.REQUEST, t2.getTicketType());
 	}
 	
 	/**
@@ -219,8 +270,10 @@ public class TicketTest {
 	 */
 	@Test
 	public void testGetTicketTypeString() {
-		Ticket t = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
-		assertEquals(TICKET_TYPE_STRING, t.getTicketTypeString());
+		Ticket t1 = new Ticket(ID, STATE, "Incident", SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
+		Ticket t2 = new Ticket(ID, STATE, "Request", SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
+		assertEquals("Incident", t1.getTicketTypeString());
+		assertEquals("Request", t2.getTicketTypeString());
 	}
 	
 	/**
@@ -260,7 +313,18 @@ public class TicketTest {
 		notes.add("hi");
 		notes.add("hello");
 		
-		Ticket t = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, notes);
-		assertEquals("*" + ID + "#" + STATE + "#" + TICKET_TYPE_STRING + "#" + SUBJECT + "#" + CALLER + "#" + CATEGORY_STRING + "#" + PRIORITY_STRING + "#" + OWNER + "#" + CODE + "\n" + t.getNotes(), t.toString());
+		Ticket t1 = new Ticket(ID, "New", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, notes);
+		Ticket t2 = new Ticket(ID, "Working", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, notes);
+		Ticket t3 = new Ticket(ID, "Feedback", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, notes);
+		Ticket t4 = new Ticket(ID, "Resolved", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, notes);
+		Ticket t5 = new Ticket(ID, "Closed", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, notes);
+		Ticket t6 = new Ticket(ID, "Cancelled", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, notes);
+		
+		assertEquals("*" + ID + "#" + "New" + "#" + TICKET_TYPE_STRING + "#" + SUBJECT + "#" + CALLER + "#" + CATEGORY_STRING + "#" + PRIORITY_STRING + "#" + OWNER + "#" + CODE + "\n" + t1.getNotes(), t1.toString());
+		assertEquals("*" + ID + "#" + "Working" + "#" + TICKET_TYPE_STRING + "#" + SUBJECT + "#" + CALLER + "#" + CATEGORY_STRING + "#" + PRIORITY_STRING + "#" + OWNER + "#" + CODE + "\n" + t2.getNotes(), t2.toString());
+		assertEquals("*" + ID + "#" + "Feedback" + "#" + TICKET_TYPE_STRING + "#" + SUBJECT + "#" + CALLER + "#" + CATEGORY_STRING + "#" + PRIORITY_STRING + "#" + OWNER + "#" + CODE + "\n" + t3.getNotes(), t3.toString());
+		assertEquals("*" + ID + "#" + "Resolved" + "#" + TICKET_TYPE_STRING + "#" + SUBJECT + "#" + CALLER + "#" + CATEGORY_STRING + "#" + PRIORITY_STRING + "#" + OWNER + "#" + CODE + "\n" + t4.getNotes(), t4.toString());
+		assertEquals("*" + ID + "#" + "Closed" + "#" + TICKET_TYPE_STRING + "#" + SUBJECT + "#" + CALLER + "#" + CATEGORY_STRING + "#" + PRIORITY_STRING + "#" + OWNER + "#" + CODE + "\n" + t5.getNotes(), t5.toString());
+		assertEquals("*" + ID + "#" + "Cancelled" + "#" + TICKET_TYPE_STRING + "#" + SUBJECT + "#" + CALLER + "#" + CATEGORY_STRING + "#" + PRIORITY_STRING + "#" + OWNER + "#" + CODE + "\n" + t6.getNotes(), t6.toString());
 	}
 }
