@@ -889,11 +889,11 @@ public class Ticket {
 			switch (command.getCommand()) {
 			
 			case PROCESS:
+				throw new UnsupportedOperationException("");
+			case REOPEN:
 				state = workingState;
 				notes.add(command.getNote());
 				break;
-			case REOPEN:
-				throw new UnsupportedOperationException("");
 			case FEEDBACK:
 				throw new UnsupportedOperationException("");
 			case RESOLVE:
@@ -901,6 +901,7 @@ public class Ticket {
 					throw new UnsupportedOperationException("");
 				}
 				
+				feedbackCode = null;
 				state = resolvedState;
 				resolutionCode = command.getResolutionCode();
 				notes.add(command.getNote());
@@ -908,6 +909,7 @@ public class Ticket {
 			case CONFIRM:
 				throw new UnsupportedOperationException("");
 			case CANCEL:
+				feedbackCode = null;
 				state = canceledState;
 				cancellationCode = command.getCancellationCode();
 				notes.add(command.getNote());
@@ -945,12 +947,13 @@ public class Ticket {
 			switch (command.getCommand()) {
 			
 			case PROCESS:
+				throw new UnsupportedOperationException("");
+			case REOPEN:
 				state = workingState;
 				notes.add(command.getNote());
 				break;
-			case REOPEN:
-				throw new UnsupportedOperationException("");
 			case FEEDBACK:
+				resolutionCode = null;
 				state = feedbackState;
 				feedbackCode = command.getFeedbackCode();
 				notes.add(command.getNote());
