@@ -864,6 +864,7 @@ public class Ticket {
 			case RESOLVE:
 				state = resolvedState;
 				resolutionCode = command.getResolutionCode();
+				break;
 			case CONFIRM:
 				throw new UnsupportedOperationException("");
 			case CANCEL:
@@ -954,6 +955,7 @@ public class Ticket {
 				throw new UnsupportedOperationException("");
 			case REOPEN:
 				state = workingState;
+				break;
 			case FEEDBACK:
 				throw new UnsupportedOperationException("");
 			case RESOLVE:
@@ -1007,6 +1009,7 @@ public class Ticket {
 			case RESOLVE:
 				state = resolvedState;
 				resolutionCode = command.getResolutionCode();
+				break;
 			case CONFIRM:
 				throw new UnsupportedOperationException("");
 			case CANCEL:

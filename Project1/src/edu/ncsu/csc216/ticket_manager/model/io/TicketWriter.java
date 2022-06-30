@@ -28,7 +28,7 @@ public class TicketWriter {
 		PrintStream fileWriter = new PrintStream(new File(filename));
 
 		for (int i = 0; i < ticketList.size(); i++) {
-			fileWriter.println(ticketList.get(i).toString());
+			fileWriter.print(ticketList.get(i).toString());
 		}
 
 		fileWriter.close();

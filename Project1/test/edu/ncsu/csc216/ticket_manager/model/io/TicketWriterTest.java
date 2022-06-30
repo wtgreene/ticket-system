@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import org.junit.Test;
@@ -44,13 +45,24 @@ public class TicketWriterTest {
 	 */
 	@Test
 	public void testWriteTicketFile() {
-		Ticket t1 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
-		Ticket t2 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
-		Ticket t3 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
+		ArrayList<String> notes = new ArrayList<String>();
+		notes.add("hi");
+		notes.add("hello");
+		List<Ticket> ticketList = new ArrayList<Ticket>();
+		Ticket t1 = new Ticket(1, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, notes);
+		Ticket t2 = new Ticket(2, STATE, TICKET_TYPE_STRING, "Helpp", CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, notes);
+		Ticket t3 = new Ticket(3, STATE, TICKET_TYPE_STRING, "Helppp", CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, notes);
+		ticketList.add(t1);
+		ticketList.add(t2);
+		ticketList.add(t3);
 		
-		//write to a file
+		try {
+		TicketWriter.writeTicketFile("test-files/ticket_list.txt", ticketList);
+		} catch (IOException e) {
+			throw new IllegalArgumentException("Can't write to file.");
+		}
 		
-		checkFiles(null, null);
+		checkFiles("test-files/ticket_list.txt", "test-files/expected_ticket_list.txt");
 	}
 	
 	/**

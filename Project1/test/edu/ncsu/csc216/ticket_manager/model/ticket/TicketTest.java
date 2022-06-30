@@ -13,6 +13,8 @@ import org.junit.Test;
 
 import edu.ncsu.csc216.ticket_manager.model.command.Command;
 import edu.ncsu.csc216.ticket_manager.model.command.Command.CommandValue;
+import edu.ncsu.csc216.ticket_manager.model.command.Command.FeedbackCode;
+import edu.ncsu.csc216.ticket_manager.model.command.Command.ResolutionCode;
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Category;
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Priority;
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.TicketType;
@@ -212,9 +214,13 @@ public class TicketTest {
 	@Test
 	public void testUpdate() {
 		Ticket t = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
-		Command c = new Command(CommandValue.PROCESS, OWNER, null, null, null, "hi");
-		t.update(c);
+		Command c1 = new Command(CommandValue.PROCESS, OWNER, null, null, null, "hi");
+		Command c2 = new Command(CommandValue.FEEDBACK, null, FeedbackCode.AWAITING_CALLER, null, null, "hi");
+		Command c3 = new Command(CommandValue.RESOLVE, null, null, ResolutionCode.CALLER_CLOSED, null, "hi");
+		t.update(c1);
 		assertEquals(Ticket.WORKING_NAME, t.getState());
+		t.update(c2);
+		t.update(c3);
 	}
 	
 	/**

@@ -38,12 +38,12 @@ public class TicketList {
 	 * @param category ticket category
 	 * @param priority ticket priority
 	 * @param note ticket note(s)
-	 * @return what does this return ? TODO
+	 * @return ticket id
 	 */
 	public int addTicket(TicketType ticketType, String subject, String caller, Category category, Priority priority, String note) {
 		Ticket t = new Ticket(ticketType, subject, caller, category, priority, note);
 		tickets.add(t);
-		return 1;
+		return tickets.size(); // this should be equal to ticket id
 	}
 	
 	/**
