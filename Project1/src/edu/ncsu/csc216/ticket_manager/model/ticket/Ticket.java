@@ -60,7 +60,7 @@ public class Ticket {
 	/** state of ticket - closed */
 	public static final String CLOSED_NAME = "Closed";
 	/** state of ticket - cancelled */
-	public static final String CANCELED_NAME = "Cancelled";
+	public static final String CANCELED_NAME = "Canceled";
 	
 	/** ticket state */
 	private TicketState state;

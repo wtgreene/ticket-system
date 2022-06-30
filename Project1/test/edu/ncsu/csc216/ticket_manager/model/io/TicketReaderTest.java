@@ -23,5 +23,9 @@ public class TicketReaderTest {
 		ArrayList<Ticket> list = new ArrayList<Ticket>();
 		list = TicketReader.readTicketFile("test-files/ticket1.txt");
 		assertEquals("GitHub down", list.get(0).getSubject());
+		
+		ArrayList<Ticket> list2 = new ArrayList<Ticket>();
+		list2 = TicketReader.readTicketFile("test-files/ticket2.txt");
+		assertEquals("Canceled", list2.get(1).getState());
 	}
 }

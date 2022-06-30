@@ -74,6 +74,7 @@ public class TicketReader {
 			
 			if (line.charAt(0) == '*' && id != 0) {	
 				ticketList.add(new Ticket(id, state, ticketType, subject, caller, category, priority, owner, code, notes));
+				id = 0;
 			}
 
 			if (line.charAt(0) == '*' && id == 0) {
