@@ -984,7 +984,7 @@ public class Ticket {
 				resolutionCode = command.getResolutionCode();
 				notes.add(command.getNote());
 				state = resolvedState;
-				break;
+				break; 
 			case CONFIRM:
 				throw new UnsupportedOperationException("");
 			case CANCEL:
