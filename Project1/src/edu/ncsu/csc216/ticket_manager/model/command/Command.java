@@ -97,7 +97,7 @@ public class Command {
 		
 		// parameter error checking - null / empty note
 		if (note == null || "".equals(note)) {
-			throw new IllegalArgumentException("TODO");
+			throw new IllegalArgumentException("Invalid command.");
 		}
 		
 		this.ownerId = ownerId;

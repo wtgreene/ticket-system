@@ -180,7 +180,7 @@ public class Ticket {
 		Ticket.incrementCounter();
 		
 		if (ticketType == null) {
-			throw new IllegalArgumentException("Invalid ticket type.");
+			throw new IllegalArgumentException("Ticket cannot be created.");
 		}
 		
 		switch (ticketType) {
@@ -200,7 +200,7 @@ public class Ticket {
 		setCaller(caller);
 		
 		if (category == null) {
-			throw new IllegalArgumentException("Invalid category.");
+			throw new IllegalArgumentException("Ticket cannot be created.");
 		}
 		
 		switch (category) {
@@ -226,7 +226,7 @@ public class Ticket {
 		}
 		
 		if (priority == null) {
-			throw new IllegalArgumentException("Invalid priority.");
+			throw new IllegalArgumentException("Ticket cannot be created.");
 		}
 		
 		switch (priority) {
@@ -248,7 +248,12 @@ public class Ticket {
 			break;
 		}
 		
+		if (note == null || "".equals(note)) {
+			throw new IllegalArgumentException("Ticket cannot be created.");
+		}
+		
 		notes.add(note);
+		
 		setOwner("");
 		
 		state = newState;
@@ -457,7 +462,7 @@ public class Ticket {
 		
 		// parameter error checking - null or empty string
 		if (caller == null || "".equals(caller)) {
-			throw new IllegalArgumentException("Invalid caller.");
+			throw new IllegalArgumentException("Ticket cannot be created.");
 		}
 		
 		this.caller = caller;
@@ -532,6 +537,12 @@ public class Ticket {
 	 * @param owner ticket owner
 	 */
 	private void setOwner(String owner) {
+		
+//		// parameter error checking - null or empty string
+//		if (owner == null || "".equals(owner)) {
+//			throw new IllegalArgumentException("Invalid owner id.");
+//		}
+		
 		this.owner = owner;
 	}
 
@@ -704,7 +715,7 @@ public class Ticket {
 		
 		// parameter error checking - null or empty string
 		if (subject == null || "".equals(subject)) {
-			throw new IllegalArgumentException("Invalid subject.");
+			throw new IllegalArgumentException("Ticket cannot be created.");
 		}
 		
 		this.subject = subject;
