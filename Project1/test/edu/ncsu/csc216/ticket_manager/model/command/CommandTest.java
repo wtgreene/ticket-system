@@ -21,6 +21,13 @@ public class CommandTest {
 	@Test
 	public void testCommand() {
 		assertDoesNotThrow(() -> new Command(Command.CommandValue.PROCESS, "wgreene", null, null, null, "hi"), "Should not throw exception");
+		assertThrows(IllegalArgumentException.class, () -> new Command(null, "wgreene", null, null, null, "hi"));
+		assertThrows(IllegalArgumentException.class, () -> new Command(Command.CommandValue.PROCESS, null, null, null, null, "hi"));
+		assertThrows(IllegalArgumentException.class, () -> new Command(Command.CommandValue.FEEDBACK, null, null, null, null, "hi"));
+		assertThrows(IllegalArgumentException.class, () -> new Command(Command.CommandValue.RESOLVE, null, null, null, null, "hi"));
+		assertThrows(IllegalArgumentException.class, () -> new Command(Command.CommandValue.CANCEL, null, null, null, null, "hi"));
+		assertThrows(IllegalArgumentException.class, () -> new Command(Command.CommandValue.PROCESS, "wgreene", null, null, null, null));
+		assertThrows(IllegalArgumentException.class, () -> new Command(Command.CommandValue.PROCESS, "wgreene", null, null, null, ""));
 	}
 	
 	/**

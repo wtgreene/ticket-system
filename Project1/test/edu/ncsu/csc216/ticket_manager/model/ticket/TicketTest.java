@@ -4,6 +4,7 @@
 package edu.ncsu.csc216.ticket_manager.model.ticket;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.util.ArrayList;
@@ -292,16 +293,41 @@ public class TicketTest {
 		Command c7 = new Command(CommandValue.FEEDBACK, null, FeedbackCode.AWAITING_CHANGE, null, null, "hi");
 		Command c8 = new Command(CommandValue.PROCESS, "new owner", null, null, null, "hi");
 		Command c9 = new Command(CommandValue.CANCEL, null, null, null, CancellationCode.INAPPROPRIATE, "hi");
+
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c5));
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c2));
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c3));
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c4));
 		t.update(c1);
 		assertEquals(Ticket.WORKING_NAME, t.getState());
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c1));
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c5));
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c4));
 		t.update(c2);
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c5));
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c2));
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c4));
 		t.update(c3);
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c5));
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c3));
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c9));
 		t.update(c4);
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c1));
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c2));
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c3));
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c4));
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c9));
 		t.update(c5);
 		t.update(c6);
 		t.update(c7);
 		t.update(c8);
 		t.update(c9);
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c1));
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c2));
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c3));
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c4));
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c5));
+		assertThrows(UnsupportedOperationException.class, () -> t.update(c9));
 	}
 	
 	/**
