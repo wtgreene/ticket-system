@@ -121,7 +121,7 @@ public class Ticket {
 		
 		// parameter error checking - negative number, or zero
 		if (number < 1) {
-			throw new IllegalArgumentException("Invalid counter.");
+			throw new IllegalArgumentException("Ticket id must be a value greater than 0.");
 		}
 		
 		counter = number;
@@ -916,9 +916,10 @@ public class Ticket {
 				state = feedbackState;
 				break;
 			case RESOLVE:
-				if (command.getResolutionCode() == ResolutionCode.WORKAROUND) {
+				if (command.getResolutionCode() != ResolutionCode.CALLER_CLOSED) {
 					throw new UnsupportedOperationException("");
 				}
+				
 				resolutionCode = command.getResolutionCode();
 				notes.add(command.getNote());
 				state = resolvedState;
@@ -965,12 +966,17 @@ public class Ticket {
 			case PROCESS:
 				throw new UnsupportedOperationException("");
 			case REOPEN:
+				feedbackCode = null;
 				notes.add(command.getNote());
 				state = workingState;
 				break;
 			case FEEDBACK:
 				throw new UnsupportedOperationException("");
 			case RESOLVE:
+				if (command.getResolutionCode() != ResolutionCode.CALLER_CLOSED) {
+					throw new UnsupportedOperationException("");
+				}
+				
 				feedbackCode = null;
 				resolutionCode = command.getResolutionCode();
 				notes.add(command.getNote());
@@ -1032,6 +1038,7 @@ public class Ticket {
 			case RESOLVE:
 				throw new UnsupportedOperationException("");
 			case CONFIRM:
+				resolutionCode = null;
 				notes.add(command.getNote());
 				state = closedState;
 				break;
