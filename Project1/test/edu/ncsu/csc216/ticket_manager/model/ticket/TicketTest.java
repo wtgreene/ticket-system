@@ -228,13 +228,13 @@ public class TicketTest {
 		Ticket t3 = new Ticket(ID, "Feedback", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
 		Ticket t4 = new Ticket(ID, "Resolved", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
 		Ticket t5 = new Ticket(ID, "Closed", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
-		Ticket t6 = new Ticket(ID, "Cancelled", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
+		Ticket t6 = new Ticket(ID, "Canceled", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
 		assertEquals("New", t1.getState());
 		assertEquals("Working", t2.getState());
 		assertEquals("Feedback", t3.getState());
 		assertEquals("Resolved", t4.getState());
 		assertEquals("Closed", t5.getState());
-		assertEquals("Cancelled", t6.getState());
+		assertEquals("Canceled", t6.getState());
 	}
 	
 	/**
