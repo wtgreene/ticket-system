@@ -30,7 +30,6 @@ public class TicketListTest {
 	private static final String SUBJECT = "Help";
 	/** caller */
 	private static final String CALLER = "wgreene";
-	/** category - string */
 	
 	/** ticket type */
 	private static final TicketType TICKET_TYPE = TicketType.INCIDENT;

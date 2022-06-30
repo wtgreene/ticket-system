@@ -26,9 +26,11 @@ public class TicketWriter {
 	 */
 	public static void writeTicketFile(String filename, List<Ticket> ticketList) {
 		PrintStream fileWriter = null;
+		File file = null;
 		
 		try {
-			fileWriter = new PrintStream(new File(filename));
+			file = new File(filename);
+			fileWriter = new PrintStream(file);
 		} catch (IOException e) {
 			throw new IllegalArgumentException("TODO");
 		}

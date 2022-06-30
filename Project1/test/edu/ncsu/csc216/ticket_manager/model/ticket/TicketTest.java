@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.ncsu.csc216.ticket_manager.model.command.Command;
+import edu.ncsu.csc216.ticket_manager.model.command.Command.CancellationCode;
 import edu.ncsu.csc216.ticket_manager.model.command.Command.CommandValue;
 import edu.ncsu.csc216.ticket_manager.model.command.Command.FeedbackCode;
 import edu.ncsu.csc216.ticket_manager.model.command.Command.ResolutionCode;
@@ -231,10 +232,23 @@ public class TicketTest {
 		Command c1 = new Command(CommandValue.PROCESS, OWNER, null, null, null, "hi");
 		Command c2 = new Command(CommandValue.FEEDBACK, null, FeedbackCode.AWAITING_CALLER, null, null, "hi");
 		Command c3 = new Command(CommandValue.RESOLVE, null, null, ResolutionCode.CALLER_CLOSED, null, "hi");
+		Command c4 = new Command(CommandValue.CONFIRM, null, null, null, null, "hi");
+		Command c5 = new Command(CommandValue.REOPEN, null, null, null, null, "hi");
+		
+		Command c6 = new Command(CommandValue.RESOLVE, null, null, ResolutionCode.NOT_COMPLETED, null, "hi");
+		Command c7 = new Command(CommandValue.FEEDBACK, null, FeedbackCode.AWAITING_CHANGE, null, null, "hi");
+		Command c8 = new Command(CommandValue.PROCESS, "new owner", null, null, null, "hi");
+		Command c9 = new Command(CommandValue.CANCEL, null, null, null, CancellationCode.INAPPROPRIATE, "hi");
 		t.update(c1);
 		assertEquals(Ticket.WORKING_NAME, t.getState());
 		t.update(c2);
 		t.update(c3);
+		t.update(c4);
+		t.update(c5);
+		t.update(c6);
+		t.update(c7);
+		t.update(c8);
+		t.update(c9);
 	}
 	
 	/**

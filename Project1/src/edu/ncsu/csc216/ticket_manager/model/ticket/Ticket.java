@@ -827,7 +827,7 @@ public class Ticket {
 				state = resolvedState;
 				resolutionCode = command.getResolutionCode();
 			case CONFIRM:
-				throw new UnsupportedOperationException("");
+				state = closedState;
 			case CANCEL:
 				state = canceledState;
 				cancellationCode = command.getCancellationCode();
