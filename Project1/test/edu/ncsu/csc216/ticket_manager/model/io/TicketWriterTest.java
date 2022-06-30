@@ -54,11 +54,7 @@ public class TicketWriterTest {
 		
 		assertEquals(t1.getTicketId(), 1);
 		
-		try {
 		TicketWriter.writeTicketFile("test-files/ticket_list.txt", ticketList);
-		} catch (IOException e) {
-			throw new IllegalArgumentException("Can't write to file.");
-		}
 		
 		checkFiles("test-files/ticket_list.txt", "test-files/expected_ticket_list.txt");
 	}

@@ -3,8 +3,6 @@
  */
 package edu.ncsu.csc216.ticket_manager.model.manager;
 
-import java.io.IOException;
-
 import edu.ncsu.csc216.ticket_manager.model.command.Command;
 import edu.ncsu.csc216.ticket_manager.model.io.TicketReader;
 import edu.ncsu.csc216.ticket_manager.model.io.TicketWriter;
@@ -52,11 +50,7 @@ public class TicketManager {
 	 * @param filename file to save tickets to
 	 */
 	public void saveTicketsToFile(String filename) {
-		try {
-			TicketWriter.writeTicketFile(filename, ticketList.getTickets());
-		} catch (IOException e) {
-			throw new IllegalArgumentException("Unable to load file.");
-		}
+		TicketWriter.writeTicketFile(filename, ticketList.getTickets());
 	}
 	
 	/**
