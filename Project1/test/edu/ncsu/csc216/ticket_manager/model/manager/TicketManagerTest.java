@@ -3,9 +3,15 @@
  */
 package edu.ncsu.csc216.ticket_manager.model.manager;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import org.junit.Test;
+
+import edu.ncsu.csc216.ticket_manager.model.command.Command;
+import edu.ncsu.csc216.ticket_manager.model.command.Command.CommandValue;
+import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Category;
+import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Priority;
+import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.TicketType;
 
 /**
  * Tests TicketManager.java
@@ -14,20 +20,25 @@ import org.junit.Test;
  */
 public class TicketManagerTest {
 	
-	/**
-	 * Tests TicketManager constructor.
-	 */
-	@Test
-	public void testTicketManager() {
-		fail();
-	}
+	
+	private static final String SUBJECT = "Help";
+	private static final String CALLER = "wgreene";
+	private static final TicketType TICKET_TYPE = TicketType.INCIDENT;
+	private static final Category CATEGORY = Category.INQUIRY;
+	private static final Priority PRIORITY = Priority.HIGH;
+	private static final String NOTE = "hi";
+	
+	/** TicketManager instance */
+	private TicketManager manager;
 	
 	/**
-	 * Tests TicketManager.getInstance().
+	 * Sets up the TicketManager.
+	 * 
+	 * @throws Exception if error
 	 */
 	@Test
-	public void testGetInstance() {
-		fail();
+	public void setUp() throws Exception {
+		manager = TicketManager.getInstance();
 	}
 	
 	/**
@@ -35,7 +46,8 @@ public class TicketManagerTest {
 	 */
 	@Test
 	public void testSaveTicketsToFile() {
-		fail();
+		manager = TicketManager.getInstance();
+		assertDoesNotThrow(() -> manager.saveTicketsToFile("test-files/ticket99.txt"));
 	}
 	
 	/**
@@ -43,7 +55,8 @@ public class TicketManagerTest {
 	 */
 	@Test
 	public void testLoadTicketsFromFile() {
-		fail();
+		manager = TicketManager.getInstance();
+		assertDoesNotThrow(() -> manager.loadTicketsFromFile("test-files/ticket1.txt"));
 	}
 	
 	/**
@@ -51,7 +64,8 @@ public class TicketManagerTest {
 	 */
 	@Test
 	public void testCreateNewTicketList() {
-		fail();
+		manager = TicketManager.getInstance();
+		assertDoesNotThrow(() -> manager.createNewTicketList());
 	}
 	
 	/**
@@ -59,7 +73,8 @@ public class TicketManagerTest {
 	 */
 	@Test
 	public void testGetTicketsForDisplay() {
-		fail();
+		manager = TicketManager.getInstance();
+		assertDoesNotThrow(() -> manager.getTicketsForDisplay());
 	}
 	
 	/**
@@ -67,7 +82,9 @@ public class TicketManagerTest {
 	 */
 	@Test
 	public void testGetTicketsForDisplayByType() {
-		fail();
+		manager = TicketManager.getInstance();
+		manager.loadTicketsFromFile("test-files/ticket1.txt");
+		assertDoesNotThrow(() -> manager.getTicketsForDisplayByType(TicketType.INCIDENT));
 	}
 	
 	/**
@@ -75,7 +92,8 @@ public class TicketManagerTest {
 	 */
 	@Test
 	public void testGetTicketById() {
-		fail();
+		manager = TicketManager.getInstance();
+		assertDoesNotThrow(() -> manager.getTicketById(1));
 	}
 	
 	/**
@@ -83,7 +101,10 @@ public class TicketManagerTest {
 	 */
 	@Test
 	public void testExecuteCommand() {
-		fail();
+		manager = TicketManager.getInstance();
+		manager.loadTicketsFromFile("test-files/ticket1.txt");
+		Command c = new Command(CommandValue.PROCESS, "wgreene", null, null, null, "hi");
+		assertDoesNotThrow(() -> manager.executeCommand(1, c));
 	}
 	
 	/**
@@ -91,7 +112,8 @@ public class TicketManagerTest {
 	 */
 	@Test
 	public void testDeleteTicketById() {
-		fail();
+		manager = TicketManager.getInstance();
+		assertDoesNotThrow(() -> manager.deleteTicketById(1));
 	}
 	
 	/**
@@ -99,6 +121,7 @@ public class TicketManagerTest {
 	 */
 	@Test
 	public void testAddTicketToList() {
-		fail();
+		manager = TicketManager.getInstance();
+		assertDoesNotThrow(() -> manager.addTicketToList(TICKET_TYPE, SUBJECT, CALLER, CATEGORY, PRIORITY, NOTE));
 	}
 }

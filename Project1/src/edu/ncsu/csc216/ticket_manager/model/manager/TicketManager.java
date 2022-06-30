@@ -3,6 +3,9 @@
  */
 package edu.ncsu.csc216.ticket_manager.model.manager;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import edu.ncsu.csc216.ticket_manager.model.command.Command;
 import edu.ncsu.csc216.ticket_manager.model.io.TicketReader;
 import edu.ncsu.csc216.ticket_manager.model.io.TicketWriter;
@@ -50,7 +53,11 @@ public class TicketManager {
 	 * @param filename file to save tickets to
 	 */
 	public void saveTicketsToFile(String filename) {
-		TicketWriter.writeTicketFile(filename, ticketList.getTickets());
+		try {
+			TicketWriter.writeTicketFile(filename, ticketList.getTickets());
+		} catch (IOException e) {
+			throw new IllegalArgumentException("Unable to load file.");
+		}
 	}
 	
 	/**
@@ -59,8 +66,12 @@ public class TicketManager {
 	 * @param filename file to read tickets from
 	 */
 	public void loadTicketsFromFile(String filename) {
-		TicketReader.readTicketFile(filename);
+		try {
+		ticketList.addTickets(TicketReader.readTicketFile(filename));
 		Ticket.setCounter(ticketList.getTickets().size());
+		} catch (FileNotFoundException e) {
+			throw new IllegalArgumentException("Unable to save file.");
+		}
 	}
 	
 	/**
@@ -99,26 +110,29 @@ public class TicketManager {
 	 * @return a String array of tickets by ticket type
 	 */
 	public String[][] getTicketsForDisplayByType(TicketType ticketType) {
-		int counter = 0;
+		int numTickets = 0;
 		
 		for (int i = 0; i < ticketList.getTickets().size(); i++) {
 			if (ticketList.getTickets().get(i).getTicketType() == ticketType) {
-				counter++;
+				numTickets++;
 			}
 		}
 		
-		String[][] s = new String[counter][6];
+		String[][] s = new String[numTickets][6];
+		int counter = 0;
 		
 		for (int i = 0; i < ticketList.getTickets().size(); i++) {
 			if (ticketList.getTickets().get(i).getTicketType() == ticketType) {
 				Ticket t = ticketList.getTickets().get(i);
 				
-				s[i][0] = Integer.toString(t.getTicketId());
-				s[i][1] = t.getTicketTypeString();
-				s[i][2] = t.getState();
-				s[i][3] = t.getSubject();
-				s[i][4] = t.getCategory();
-				s[i][5] = t.getPriority();
+				s[counter][0] = Integer.toString(t.getTicketId());
+				s[counter][1] = t.getTicketTypeString();
+				s[counter][2] = t.getState();
+				s[counter][3] = t.getSubject();
+				s[counter][4] = t.getCategory();
+				s[counter][5] = t.getPriority();
+				
+				counter++;
 			}
 		}
 		

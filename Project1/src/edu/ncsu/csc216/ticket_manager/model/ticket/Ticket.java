@@ -48,6 +48,7 @@ public class Ticket {
 	public static final String P_MEDIUM = "Medium";
 	/** priority - low */
 	public static final String P_LOW = "Low";
+	
 	/** state of ticket - new */
 	public static final String NEW_NAME = "New";
 	/** state of ticket - working */
@@ -101,7 +102,7 @@ public class Ticket {
 	/** ticket owner */
 	private String owner;
 	/** ticket note(s) */
-	private ArrayList<String> notes;
+	private ArrayList<String> notes = new ArrayList<String>();
 	
 	/**
 	 * Increments the counter by 1.
@@ -147,6 +148,7 @@ public class Ticket {
 			setCounter(id + 1);
 		}
 		
+		ticketId = id;
 		setState(state);
 		setTicketType(ticketType);
 		setSubject(subject);
@@ -154,32 +156,9 @@ public class Ticket {
 		setCategory(category);
 		setPriority(priority);
 		setOwner(owner);
-	
-		switch (code) {
-		
-		case Command.F_CALLER :
-		case Command.F_CHANGE :
-		case Command.F_PROVIDER :
-			setFeedbackCode(code);
-			break;
-			
-		case Command.RC_COMPLETED :
-		case Command.RC_NOT_COMPLETED :
-		case Command.RC_SOLVED :
-		case Command.RC_WORKAROUND :
-		case Command.RC_NOT_SOLVED :
-		case Command.RC_CALLER_CLOSED :
-			setResolutionCode(code);
-			break;
-			
-		case Command.CC_DUPLICATE :
-		case Command.CC_INAPPROPRIATE :
-			setCancellationCode(code);
-			break;
-		
-		default :
-			break;
-		}
+		setFeedbackCode(code);
+		setResolutionCode(code);
+		setCancellationCode(code);
 	
 		this.notes = notes;
 	}
@@ -197,6 +176,9 @@ public class Ticket {
 	public Ticket(TicketType ticketType, String subject, String caller, Category category, Priority priority,
 			String note) {
 		
+		ticketId = counter;
+		Ticket.incrementCounter();
+				
 		switch (ticketType) {
 		
 		case REQUEST :
@@ -254,10 +236,13 @@ public class Ticket {
 			break;
 		}
 		
-		// not sure if this suffices
 		notes.add(note);
-		
 		setOwner("");
+		
+		state = newState;
+		feedbackCode = null;
+		resolutionCode = null;
+		cancellationCode = null;
 	}
 
 	/**
@@ -339,7 +324,7 @@ public class Ticket {
 		String s = "";
 		
 		for (int i = 0; i < notes.size(); i++) {
-			s += notes.get(i) + "\n";
+			s += "-" + notes.get(i) + "\n";
 		}
 		
 		return s;
@@ -445,7 +430,6 @@ public class Ticket {
 			return TT_REQUEST;
 		case INCIDENT :
 			return TT_INCIDENT;
-			
 		default:
 			return null;
 		}	
@@ -474,15 +458,25 @@ public class Ticket {
 	 */
 	private void setCancellationCode(String cancellationCode) {
 		
-		switch (cancellationCode) {
+		if (cancellationCode == null) {
+			this.cancellationCode = null;
+		}
 		
-		case Command.CC_DUPLICATE :
-			this.cancellationCode = CancellationCode.DUPLICATE;
-		case Command.CC_INAPPROPRIATE :
-			this.cancellationCode = CancellationCode.INAPPROPRIATE;
-			
-		default:
-			break;
+		else {
+		
+			switch (cancellationCode) {
+
+			case Command.CC_DUPLICATE:
+				this.cancellationCode = CancellationCode.DUPLICATE;
+				break;
+			case Command.CC_INAPPROPRIATE:
+				this.cancellationCode = CancellationCode.INAPPROPRIATE;
+				break;
+
+			default:
+				this.cancellationCode = null;
+				break;
+			}
 		}
 	}
 
@@ -497,14 +491,19 @@ public class Ticket {
 		
 		case C_INQUIRY :
 			this.category = Category.INQUIRY;
+			break;
 		case C_SOFTWARE :
 			this.category = Category.SOFTWARE;
+			break;
 		case C_HARDWARE :
 			this.category = Category.HARDWARE;
+			break;
 		case C_NETWORK :
 			this.category = Category.NETWORK;
+			break;
 		case C_DATABASE :
 			this.category = Category.DATABASE;
+			break;
 			
 		default:
 			break;
@@ -527,17 +526,27 @@ public class Ticket {
 	 */
 	private void setFeedbackCode(String feedbackCode) {
 		
-		switch (feedbackCode) {
+		if (feedbackCode == null) {
+			this.feedbackCode = null;
+		}
 		
-		case Command.F_CALLER :
-			this.feedbackCode = FeedbackCode.AWAITING_CALLER;
-		case Command.F_CHANGE :
-			this.feedbackCode = FeedbackCode.AWAITING_CHANGE;
-		case Command.F_PROVIDER :
-			this.feedbackCode = FeedbackCode.AWAITING_PROVIDER;
-			
-		default:
-			break;
+		else {
+		
+			switch (feedbackCode) {
+
+			case Command.F_CALLER:
+				this.feedbackCode = FeedbackCode.AWAITING_CALLER;
+				break;
+			case Command.F_CHANGE:
+				this.feedbackCode = FeedbackCode.AWAITING_CHANGE;
+				break;
+			case Command.F_PROVIDER:
+				this.feedbackCode = FeedbackCode.AWAITING_PROVIDER;
+				break;
+
+			default:
+				break;
+			}
 		}
 	}
 
@@ -552,12 +561,16 @@ public class Ticket {
 		
 		case P_URGENT :
 			this.priority = Priority.URGENT;
+			break;
 		case P_HIGH :
 			this.priority = Priority.HIGH;
+			break;
 		case P_MEDIUM :
 			this.priority = Priority.MEDIUM;
+			break;
 		case P_LOW :
 			this.priority = Priority.LOW;
+			break;
 			
 		default:
 			break;
@@ -571,24 +584,37 @@ public class Ticket {
 	 */
 	private void setResolutionCode(String resolutionCode) {
 		
-		switch (resolutionCode) {
+		if (resolutionCode == null) {
+			this.resolutionCode = null;
+		}
 		
-		case Command.RC_COMPLETED :
-			this.resolutionCode = ResolutionCode.COMPLETED;
-		case Command.RC_NOT_COMPLETED :
-			this.resolutionCode = ResolutionCode.NOT_COMPLETED;
-		case Command.RC_SOLVED :
-			this.resolutionCode = ResolutionCode.SOLVED;
-		case Command.RC_WORKAROUND :
-			this.resolutionCode = ResolutionCode.WORKAROUND;
-		case Command.RC_NOT_SOLVED :
-			this.resolutionCode = ResolutionCode.NOT_SOLVED;
-		case Command.RC_CALLER_CLOSED :
-			this.resolutionCode = ResolutionCode.CALLER_CLOSED;
-			
-		default:
-			break;
-		}	
+		else {
+
+			switch (resolutionCode) {
+
+			case Command.RC_COMPLETED:
+				this.resolutionCode = ResolutionCode.COMPLETED;
+				break;
+			case Command.RC_NOT_COMPLETED:
+				this.resolutionCode = ResolutionCode.NOT_COMPLETED;
+				break;
+			case Command.RC_SOLVED:
+				this.resolutionCode = ResolutionCode.SOLVED;
+				break;
+			case Command.RC_WORKAROUND:
+				this.resolutionCode = ResolutionCode.WORKAROUND;
+				break;
+			case Command.RC_NOT_SOLVED:
+				this.resolutionCode = ResolutionCode.NOT_SOLVED;
+				break;
+			case Command.RC_CALLER_CLOSED:
+				this.resolutionCode = ResolutionCode.CALLER_CLOSED;
+				break;
+
+			default:
+				break;
+			}
+		}
 	}
 
 	/**
@@ -602,16 +628,22 @@ public class Ticket {
 		
 		case NEW_NAME :
 			this.state = newState;
+			break;
 		case WORKING_NAME :
 			this.state = workingState;
+			break;
 		case FEEDBACK_NAME :
 			this.state = feedbackState;
+			break;
 		case RESOLVED_NAME :
 			this.state = resolvedState;
+			break;
 		case CLOSED_NAME :
 			this.state = closedState;
+			break;
 		case CANCELED_NAME :
 			this.state = canceledState;
+			break;
 			
 		default:
 			break;
@@ -645,8 +677,10 @@ public class Ticket {
 		
 		case TT_REQUEST :
 			this.ticketType = TicketType.REQUEST;
+			break;
 		case TT_INCIDENT :
 			this.ticketType = TicketType.INCIDENT;
+			break;
 			
 		default:
 			break;
@@ -670,29 +704,35 @@ public class Ticket {
 	@Override
 	public String toString() {
 		
-		String s1 = getTicketId() + "#" + getState() + "#" + getTicketType() + "#" + getSubject() + "#" + getCaller() + "#" + getCategory() + "#" + getPriority() + "#" + getOwner() + "#";
+		String s1 = "*" + getTicketId() + "#" + getState() + "#" + getTicketTypeString() + "#" + getSubject() + "#" + getCaller() + "#" + getCategory() + "#" + getPriority() + "#" + getOwner() + "#";
 		String s2 = "";
 		
 		switch (state.getStateName()) {
 		
 		case NEW_NAME :
+			s2 = null;
 			break;
 		case WORKING_NAME :
+			s2 = null;
 			break;
 		case FEEDBACK_NAME :
 			s2 = getFeedbackCode();
+			break;
 		case RESOLVED_NAME :
 			s2 = getResolutionCode();
+			break;
 		case CLOSED_NAME :
+			s2 = null;
 			break;
 		case CANCELED_NAME :
 			s2 = getCancellationCode();
+			break;
 			
 		default:
 			break;
 		}
 		
-		String s3 = getNotes();
+		String s3 = "\n" + getNotes();
 		return s1 + s2 + s3;
 	}
 

@@ -43,7 +43,6 @@ public class TicketList {
 	public int addTicket(TicketType ticketType, String subject, String caller, Category category, Priority priority, String note) {
 		Ticket t = new Ticket(ticketType, subject, caller, category, priority, note);
 		tickets.add(t);
-		Ticket.incrementCounter();
 		return 1;
 	}
 	
