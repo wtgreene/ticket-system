@@ -610,31 +610,49 @@ public class Ticket {
 		}
 		
 		else {
+			
+			if (ticketType == TicketType.REQUEST) {
+				
+				switch (resolutionCode) {
+				
+				case Command.RC_COMPLETED:
+					this.resolutionCode = ResolutionCode.COMPLETED;
+					break;
+				case Command.RC_NOT_COMPLETED:
+					this.resolutionCode = ResolutionCode.NOT_COMPLETED;
+					break;
+				case Command.RC_CALLER_CLOSED:
+					this.resolutionCode = ResolutionCode.CALLER_CLOSED;
+					break;
 
-			switch (resolutionCode) {
+				default:
+					this.resolutionCode = null;
+					break;
+				
+				}
+			}
+			
+			else if (ticketType == TicketType.INCIDENT) {
 
-			case Command.RC_COMPLETED:
-				this.resolutionCode = ResolutionCode.COMPLETED;
-				break;
-			case Command.RC_NOT_COMPLETED:
-				this.resolutionCode = ResolutionCode.NOT_COMPLETED;
-				break;
-			case Command.RC_SOLVED:
-				this.resolutionCode = ResolutionCode.SOLVED;
-				break;
-			case Command.RC_WORKAROUND:
-				this.resolutionCode = ResolutionCode.WORKAROUND;
-				break;
-			case Command.RC_NOT_SOLVED:
-				this.resolutionCode = ResolutionCode.NOT_SOLVED;
-				break;
-			case Command.RC_CALLER_CLOSED:
-				this.resolutionCode = ResolutionCode.CALLER_CLOSED;
-				break;
+				switch (resolutionCode) {
 
-			default:
-				this.resolutionCode = null;
-				break;
+				case Command.RC_SOLVED:
+					this.resolutionCode = ResolutionCode.SOLVED;
+					break;
+				case Command.RC_WORKAROUND:
+					this.resolutionCode = ResolutionCode.WORKAROUND;
+					break;
+				case Command.RC_NOT_SOLVED:
+					this.resolutionCode = ResolutionCode.NOT_SOLVED;
+					break;
+				case Command.RC_CALLER_CLOSED:
+					this.resolutionCode = ResolutionCode.CALLER_CLOSED;
+					break;
+
+				default:
+					this.resolutionCode = null;
+					break;
+				}
 			}
 		}
 	}
