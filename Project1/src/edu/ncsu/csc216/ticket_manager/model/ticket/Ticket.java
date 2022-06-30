@@ -917,10 +917,10 @@ public class Ticket {
 				break;
 			case RESOLVE:
 				
-				if (command.getResolutionCode() != ResolutionCode.WORKAROUND
-						&& command.getResolutionCode() != ResolutionCode.CALLER_CLOSED) {
-					throw new UnsupportedOperationException("");
-				}
+//				if (command.getResolutionCode() != ResolutionCode.WORKAROUND
+//						&& command.getResolutionCode() != ResolutionCode.CALLER_CLOSED) {
+//					throw new UnsupportedOperationException("");
+//				}
 				
 				resolutionCode = command.getResolutionCode();
 				notes.add(command.getNote());
@@ -975,10 +975,10 @@ public class Ticket {
 				throw new UnsupportedOperationException("");
 			case RESOLVE:
 				
-				if (command.getResolutionCode() != ResolutionCode.SOLVED
-						&& command.getResolutionCode() != ResolutionCode.CALLER_CLOSED) {
-					throw new UnsupportedOperationException("");
-				} 
+//				if (command.getResolutionCode() != ResolutionCode.SOLVED
+//						&& command.getResolutionCode() != ResolutionCode.CALLER_CLOSED) {
+//					throw new UnsupportedOperationException("");
+//				} 
 				
 				feedbackCode = null;
 				resolutionCode = command.getResolutionCode();
