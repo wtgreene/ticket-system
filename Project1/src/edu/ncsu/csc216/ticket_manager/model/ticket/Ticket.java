@@ -788,6 +788,7 @@ public class Ticket {
 			case PROCESS:
 				state = workingState;
 				owner = command.getOwnerId();
+				notes.add(command.getNote());
 				break;
 			case REOPEN:
 				throw new UnsupportedOperationException("");
@@ -800,6 +801,7 @@ public class Ticket {
 			case CANCEL:
 				state = canceledState;
 				cancellationCode = command.getCancellationCode();
+				notes.add(command.getNote());
 				break;
 			default:
 				break;
@@ -840,16 +842,19 @@ public class Ticket {
 			case FEEDBACK:
 				state = feedbackState;
 				feedbackCode = command.getFeedbackCode();
+				notes.add(command.getNote());
 				break;
 			case RESOLVE:
 				state = resolvedState;
 				resolutionCode = command.getResolutionCode();
+				notes.add(command.getNote());
 				break;
 			case CONFIRM:
 				throw new UnsupportedOperationException("");
 			case CANCEL:
 				state = canceledState;
 				cancellationCode = command.getCancellationCode();
+				notes.add(command.getNote());
 				break;
 			default:
 				break;
@@ -885,20 +890,27 @@ public class Ticket {
 			
 			case PROCESS:
 				state = workingState;
+				notes.add(command.getNote());
 				break;
 			case REOPEN:
 				throw new UnsupportedOperationException("");
 			case FEEDBACK:
 				throw new UnsupportedOperationException("");
 			case RESOLVE:
+				if (command.getResolutionCode() == ResolutionCode.COMPLETED) {
+					throw new UnsupportedOperationException("");
+				}
+				
 				state = resolvedState;
 				resolutionCode = command.getResolutionCode();
+				notes.add(command.getNote());
 				break;
 			case CONFIRM:
 				throw new UnsupportedOperationException("");
 			case CANCEL:
 				state = canceledState;
 				cancellationCode = command.getCancellationCode();
+				notes.add(command.getNote());
 				break;
 			default:
 				break;
@@ -934,17 +946,20 @@ public class Ticket {
 			
 			case PROCESS:
 				state = workingState;
+				notes.add(command.getNote());
 				break;
 			case REOPEN:
 				throw new UnsupportedOperationException("");
 			case FEEDBACK:
 				state = feedbackState;
 				feedbackCode = command.getFeedbackCode();
+				notes.add(command.getNote());
 				break;
 			case RESOLVE:
 				throw new UnsupportedOperationException("");
 			case CONFIRM:
 				state = closedState;
+				notes.add(command.getNote());
 				break;
 			case CANCEL:
 				throw new UnsupportedOperationException("");
@@ -984,6 +999,7 @@ public class Ticket {
 				throw new UnsupportedOperationException("");
 			case REOPEN:
 				state = workingState;
+				notes.add(command.getNote());
 				break;
 			case FEEDBACK:
 				throw new UnsupportedOperationException("");

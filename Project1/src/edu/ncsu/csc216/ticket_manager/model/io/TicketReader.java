@@ -52,7 +52,7 @@ public class TicketReader {
 		try {
 			fileReader = new Scanner(new FileInputStream(filename));
 		} catch (FileNotFoundException e) {
-			throw new IllegalArgumentException("File not found.");
+			throw new IllegalArgumentException("Unable to load file.");
 		}
 		
 		ArrayList<Ticket> ticketList = new ArrayList<Ticket>();
