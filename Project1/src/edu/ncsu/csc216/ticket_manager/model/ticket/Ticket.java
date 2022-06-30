@@ -929,10 +929,6 @@ public class Ticket {
 			case FEEDBACK:
 				throw new UnsupportedOperationException("");
 			case RESOLVE:
-				if (command.getResolutionCode() == ResolutionCode.COMPLETED) {
-					throw new UnsupportedOperationException("");
-				}
-				
 				feedbackCode = null;
 				resolutionCode = command.getResolutionCode();
 				notes.add(command.getNote());
@@ -941,6 +937,7 @@ public class Ticket {
 			case CONFIRM:
 				throw new UnsupportedOperationException("");
 			case CANCEL:
+				feedbackCode = null;
 				cancellationCode = command.getCancellationCode();
 				notes.add(command.getNote());
 				state = canceledState;
