@@ -19,13 +19,21 @@ import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket;
  */
 public class TicketWriterTest {
 	
+	/** state name */
 	private static final String STATE = Ticket.NEW_NAME;
+	/** ticket type - string */
 	private static final String TICKET_TYPE_STRING = Ticket.TT_INCIDENT;
+	/** subject */
 	private static final String SUBJECT = "Help";
+	/** caller */
 	private static final String CALLER = "wgreene";
+	/** category - string */
 	private static final String CATEGORY_STRING = Ticket.C_INQUIRY;
+	/** priority - string */
 	private static final String PRIORITY_STRING = Ticket.P_HIGH;
+	/** owner */
 	private static final String OWNER = "bstark";
+	/** code */
 	private static final String CODE = null;
 	
 	/**
@@ -43,6 +51,8 @@ public class TicketWriterTest {
 		ticketList.add(t1);
 		ticketList.add(t2);
 		ticketList.add(t3);
+		
+		assertEquals(t1.getTicketId(), 1);
 		
 		try {
 		TicketWriter.writeTicketFile("test-files/ticket_list.txt", ticketList);

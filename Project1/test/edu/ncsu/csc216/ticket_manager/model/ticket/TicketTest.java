@@ -26,22 +26,36 @@ import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.TicketType;
  */
 public class TicketTest {
 	
+	/** ticket type - request */
 	private static final int ID = 1;
+	/** state name */
 	private static final String STATE = Ticket.NEW_NAME;
+	/** ticket type - string */
 	private static final String TICKET_TYPE_STRING = Ticket.TT_INCIDENT;
+	/** subject */
 	private static final String SUBJECT = "Help";
+	/** caller */
 	private static final String CALLER = "wgreene";
+	/** category - string */
 	private static final String CATEGORY_STRING = Ticket.C_INQUIRY;
+	/** priority - string */
 	private static final String PRIORITY_STRING = Ticket.P_HIGH;
+	/** owner */
 	private static final String OWNER = "bstark";
+	/** code */
 	private static final String CODE = null;
+	/** notes */
 	private static final ArrayList<String> NOTES = null;
 	
+	/** ticket type */
 	private static final TicketType TICKET_TYPE = TicketType.INCIDENT;
+	/** category */
 	private static final Category CATEGORY = Category.INQUIRY;
+	/** priority */
 	private static final Priority PRIORITY = Priority.HIGH;
+	/** note */
 	private static final String NOTE = "hi";
-
+	
 	/**
 	 * Resets the Ticket counter at the beginning of every test.
 	 */

@@ -19,16 +19,26 @@ import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket;
  */
 public class TicketReader {
 	
-	private static int id = 0;
-	private static String state;
-	private static String ticketType;
-	private static String subject;
-	private static String caller;
-	private static String category;
-	private static String priority;
-	private static String owner;
-	private static String code;
-	private static ArrayList<String> notes = new ArrayList<String>();
+//	/** id */
+//	private static int id = 0;
+//	/** state name */
+//	private static String state;
+//	/** ticket type - string */
+//	private static String ticketType;
+//	/** subject */
+//	private static String subject;
+//	/** caller */
+//	private static String caller;
+//	/** category */
+//	private static String category;
+//	/** priority */
+//	private static String priority;
+//	/** owner */
+//	private static String owner;
+//	/** code */
+//	private static String code;
+//	/** notes */
+//	private static ArrayList<String> notes = new ArrayList<String>();
 	
 	/**
 	 * Reads tickets from a text file and returns a list of valid tickets.
@@ -37,9 +47,26 @@ public class TicketReader {
 	 * @return a list of valid tickets
 	 * @throws FileNotFoundException if errors result from processing the file
 	 */
-	public static ArrayList<Ticket> readTicketFile(String filename) throws FileNotFoundException {
-		Scanner fileReader = new Scanner(new FileInputStream(filename));
+	public static ArrayList<Ticket> readTicketFile(String filename) {
+		Scanner fileReader = null;
+		try {
+			fileReader = new Scanner(new FileInputStream(filename));
+		} catch (FileNotFoundException e) {
+			throw new IllegalArgumentException("File not found.");
+		}
+		
 		ArrayList<Ticket> ticketList = new ArrayList<Ticket>();
+		
+		int id = 0;
+		String state = "";
+		String ticketType = "";
+		String subject = "";
+		String caller = "";
+		String category = "";
+		String priority = "";
+		String owner = "";
+		String code = "";
+		ArrayList<String> notes = new ArrayList<String>();
 		
 		while (fileReader.hasNextLine()) {
 			

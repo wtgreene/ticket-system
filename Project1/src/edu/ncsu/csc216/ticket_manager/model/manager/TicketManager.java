@@ -3,7 +3,6 @@
  */
 package edu.ncsu.csc216.ticket_manager.model.manager;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import edu.ncsu.csc216.ticket_manager.model.command.Command;
@@ -66,12 +65,8 @@ public class TicketManager {
 	 * @param filename file to read tickets from
 	 */
 	public void loadTicketsFromFile(String filename) {
-		try {
 		ticketList.addTickets(TicketReader.readTicketFile(filename));
 		Ticket.setCounter(ticketList.getTickets().size());
-		} catch (FileNotFoundException e) {
-			throw new IllegalArgumentException("Unable to save file.");
-		}
 	}
 	
 	/**

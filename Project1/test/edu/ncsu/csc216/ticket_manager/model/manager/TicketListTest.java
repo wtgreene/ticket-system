@@ -25,12 +25,20 @@ import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.TicketType;
  * @author Will Greene
  */
 public class TicketListTest {
-	
+
+	/** subject */
 	private static final String SUBJECT = "Help";
+	/** caller */
 	private static final String CALLER = "wgreene";
+	/** category - string */
+	
+	/** ticket type */
 	private static final TicketType TICKET_TYPE = TicketType.INCIDENT;
+	/** category */
 	private static final Category CATEGORY = Category.INQUIRY;
+	/** priority */
 	private static final Priority PRIORITY = Priority.HIGH;
+	/** note */
 	private static final String NOTE = "hi";
 	
 	/**
@@ -137,6 +145,7 @@ public class TicketListTest {
 		
 		Command c = new Command(CommandValue.PROCESS, "owner", null, null, null, NOTE);
 		list1.executeCommand(1, c);
+		assertEquals(list1.getTicketById(1).getState(), "Working");
 	}
 	
 	/**

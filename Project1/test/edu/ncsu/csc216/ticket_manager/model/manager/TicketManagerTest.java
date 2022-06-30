@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import edu.ncsu.csc216.ticket_manager.model.command.Command;
 import edu.ncsu.csc216.ticket_manager.model.command.Command.CommandValue;
+import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket;
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Category;
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Priority;
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.TicketType;
@@ -20,13 +21,19 @@ import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.TicketType;
  * @author Will Greene
  */
 public class TicketManagerTest {
-	
-	
+
+	/** subject */
 	private static final String SUBJECT = "Help";
+	/** caller */
 	private static final String CALLER = "wgreene";
+	
+	/** ticket type */
 	private static final TicketType TICKET_TYPE = TicketType.INCIDENT;
+	/** category */
 	private static final Category CATEGORY = Category.INQUIRY;
+	/** priority */
 	private static final Priority PRIORITY = Priority.HIGH;
+	/** note */
 	private static final String NOTE = "hi";
 	
 	/** TicketManager instance */
@@ -41,6 +48,7 @@ public class TicketManagerTest {
 	public void setUp() throws Exception {
 		manager = TicketManager.getInstance();
 		manager.createNewTicketList();
+		Ticket.setCounter(1);
 	}
 	
 	/**

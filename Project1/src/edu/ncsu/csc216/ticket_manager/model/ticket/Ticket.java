@@ -178,7 +178,11 @@ public class Ticket {
 		
 		ticketId = counter;
 		Ticket.incrementCounter();
-				
+		
+		if (ticketType == null) {
+			throw new IllegalArgumentException("TODO");
+		}
+		
 		switch (ticketType) {
 		
 		case REQUEST :
@@ -194,6 +198,10 @@ public class Ticket {
 		
 		setSubject(subject);
 		setCaller(caller);
+		
+		if (category == null) {
+			throw new IllegalArgumentException("TODO");
+		}
 		
 		switch (category) {
 		
@@ -215,6 +223,10 @@ public class Ticket {
 			
 		default :
 			break;
+		}
+		
+		if (priority == null) {
+			throw new IllegalArgumentException("TODO");
 		}
 		
 		switch (priority) {
