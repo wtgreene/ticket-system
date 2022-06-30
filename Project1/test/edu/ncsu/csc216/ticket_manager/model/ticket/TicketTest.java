@@ -208,8 +208,8 @@ public class TicketTest {
 		Ticket t2 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, "Not Solved", NOTES);
 		Ticket t3 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, "Workaround", NOTES);
 		Ticket t4 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, "Caller Closed", NOTES);
-		Ticket t5 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, "Completed", NOTES);
-		Ticket t6 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, "Not Completed", NOTES);
+		Ticket t5 = new Ticket(ID, STATE, "Request", SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, "Completed", NOTES);
+		Ticket t6 = new Ticket(ID, STATE, "Request", SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, "Not Completed", NOTES);
 		assertEquals("Solved", t1.getResolutionCode());
 		assertEquals("Not Solved", t2.getResolutionCode());
 		assertEquals("Workaround", t3.getResolutionCode());
