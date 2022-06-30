@@ -919,6 +919,7 @@ public class Ticket {
 					throw new UnsupportedOperationException("");
 				}
 				
+				feedbackCode = null;
 				state = resolvedState;
 				resolutionCode = command.getResolutionCode();
 				notes.add(command.getNote());
