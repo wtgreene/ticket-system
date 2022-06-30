@@ -337,6 +337,7 @@ public class TicketTest {
 		t2.update(c9);
 		
 		Ticket t3 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, notes);
+		t3.update(c1);
 		t3.update(c2);
 		t3.update(c9); 
 	}
