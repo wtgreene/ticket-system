@@ -115,6 +115,8 @@ public class TicketReader {
 			}
 		}
 		
+		ticketList.add(new Ticket(id, state, ticketType, subject, caller, category, priority, owner, code, notes));
+		
 		return ticketList;
 	}
 }

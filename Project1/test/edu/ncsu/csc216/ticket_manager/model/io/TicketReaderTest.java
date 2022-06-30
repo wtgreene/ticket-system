@@ -26,6 +26,6 @@ public class TicketReaderTest {
 		
 		ArrayList<Ticket> list2 = new ArrayList<Ticket>();
 		list2 = TicketReader.readTicketFile("test-files/ticket2.txt");
-		assertEquals("Canceled", list2.get(1).getState());
+		assertEquals("New", list2.get(2).getState());
 	}
 }
