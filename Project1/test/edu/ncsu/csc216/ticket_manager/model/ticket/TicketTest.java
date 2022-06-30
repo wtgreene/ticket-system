@@ -282,7 +282,11 @@ public class TicketTest {
 	 */
 	@Test
 	public void testUpdate() {
-		Ticket t = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
+		ArrayList<String> notes = new ArrayList<String>();
+		notes.add("hi");
+		notes.add("hello");
+		
+		Ticket t = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, notes);
 		Command c1 = new Command(CommandValue.PROCESS, OWNER, null, null, null, "hi");
 		Command c2 = new Command(CommandValue.FEEDBACK, null, FeedbackCode.AWAITING_CALLER, null, null, "hi");
 		Command c3 = new Command(CommandValue.RESOLVE, null, null, ResolutionCode.CALLER_CLOSED, null, "hi");
@@ -329,7 +333,7 @@ public class TicketTest {
 		assertThrows(UnsupportedOperationException.class, () -> t.update(c5));
 		assertThrows(UnsupportedOperationException.class, () -> t.update(c9));
 		
-		Ticket t2 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
+		Ticket t2 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, notes);
 		t2.update(c9);
 	}
 	
