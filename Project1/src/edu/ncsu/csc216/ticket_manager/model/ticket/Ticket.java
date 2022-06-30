@@ -971,6 +971,12 @@ public class Ticket {
 			case FEEDBACK:
 				throw new UnsupportedOperationException("");
 			case RESOLVE:
+				
+				if (command.getResolutionCode() != ResolutionCode.SOLVED
+						|| command.getResolutionCode() != ResolutionCode.CALLER_CLOSED) {
+					throw new UnsupportedOperationException("");
+				}
+				
 				feedbackCode = null;
 				resolutionCode = command.getResolutionCode();
 				notes.add(command.getNote());
