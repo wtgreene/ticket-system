@@ -276,15 +276,22 @@ public class Ticket {
 	 */
 	public String getCancellationCode() {
 		
-		switch (cancellationCode) {
-		
-		case DUPLICATE :
-			return Command.CC_DUPLICATE;
-		case INAPPROPRIATE :
-			return Command.CC_INAPPROPRIATE;
-			
-		default:
+		if (cancellationCode == null) {
 			return null;
+		}
+		
+		else {
+
+			switch (cancellationCode) {
+
+			case DUPLICATE:
+				return Command.CC_DUPLICATE;
+			case INAPPROPRIATE:
+				return Command.CC_INAPPROPRIATE;
+
+			default:
+				return null;
+			}
 		}
 	}
 
@@ -294,21 +301,28 @@ public class Ticket {
 	 */
 	public String getCategory() {
 		
-		switch (category) {
-		
-		case INQUIRY :
-			return C_INQUIRY;
-		case SOFTWARE :
-			return C_SOFTWARE;
-		case HARDWARE :
-			return C_HARDWARE;
-		case NETWORK :
-			return C_NETWORK;
-		case DATABASE :
-			return C_DATABASE;
-			
-		default:
+		if (category == null) {
 			return null;
+		}
+		
+		else {
+
+			switch (category) {
+
+			case INQUIRY:
+				return C_INQUIRY;
+			case SOFTWARE:
+				return C_SOFTWARE;
+			case HARDWARE:
+				return C_HARDWARE;
+			case NETWORK:
+				return C_NETWORK;
+			case DATABASE:
+				return C_DATABASE;
+
+			default:
+				return null;
+			}
 		}
 	}
 
@@ -318,17 +332,24 @@ public class Ticket {
 	 */
 	public String getFeedbackCode() {
 		
-		switch (feedbackCode) {
-		
-		case AWAITING_CALLER :
-			return Command.F_CALLER;
-		case AWAITING_CHANGE :
-			return Command.F_CHANGE;
-		case AWAITING_PROVIDER :
-			return Command.F_PROVIDER;
-			
-		default:
+		if (feedbackCode == null) {
 			return null;
+		}
+		
+		else {
+
+			switch (feedbackCode) {
+
+			case AWAITING_CALLER:
+				return Command.F_CALLER;
+			case AWAITING_CHANGE:
+				return Command.F_CHANGE;
+			case AWAITING_PROVIDER:
+				return Command.F_PROVIDER;
+
+			default:
+				return null;
+			}
 		}
 	}
 
@@ -361,20 +382,27 @@ public class Ticket {
 	 */
 	public String getPriority() {
 		
-		switch (priority) {
-		
-		case URGENT :
-			return P_URGENT;
-		case HIGH :
-			return P_HIGH;
-		case MEDIUM :
-			return P_MEDIUM;
-		case LOW :
-			return P_LOW;
-			
-		default:
+		if (priority == null) {
 			return null;
-		}	
+		}
+		
+		else {
+
+			switch (priority) {
+
+			case URGENT:
+				return P_URGENT;
+			case HIGH:
+				return P_HIGH;
+			case MEDIUM:
+				return P_MEDIUM;
+			case LOW:
+				return P_LOW;
+
+			default:
+				return null;
+			}
+		}
 	}
 
 	/**
@@ -383,23 +411,30 @@ public class Ticket {
 	 */
 	public String getResolutionCode() {
 		
-		switch (resolutionCode) {
-		
-		case COMPLETED :
-			return Command.RC_COMPLETED;
-		case NOT_COMPLETED :
-			return Command.RC_NOT_COMPLETED;
-		case SOLVED :
-			return Command.RC_SOLVED;
-		case WORKAROUND :
-			return Command.RC_WORKAROUND;
-		case NOT_SOLVED :
-			return Command.RC_NOT_SOLVED;
-		case CALLER_CLOSED :
-			return Command.RC_CALLER_CLOSED;
-			
-		default:
+		if (resolutionCode == null) {
 			return null;
+		}
+
+		else {
+
+			switch (resolutionCode) {
+
+			case COMPLETED:
+				return Command.RC_COMPLETED;
+			case NOT_COMPLETED:
+				return Command.RC_NOT_COMPLETED;
+			case SOLVED:
+				return Command.RC_SOLVED;
+			case WORKAROUND:
+				return Command.RC_WORKAROUND;
+			case NOT_SOLVED:
+				return Command.RC_NOT_SOLVED;
+			case CALLER_CLOSED:
+				return Command.RC_CALLER_CLOSED;
+
+			default:
+				return null;
+			}
 		}	
 	}
 
@@ -441,15 +476,22 @@ public class Ticket {
 	 */
 	public String getTicketTypeString() {
 		
-		switch (ticketType) {
-		
-		case REQUEST :
-			return TT_REQUEST;
-		case INCIDENT :
-			return TT_INCIDENT;
-		default:
+		if (ticketType == null) {
 			return null;
-		}	
+		}
+		
+		else {
+
+			switch (ticketType) {
+
+			case REQUEST:
+				return TT_REQUEST;
+			case INCIDENT:
+				return TT_INCIDENT;
+			default:
+				return null;
+			}
+		}
 	}
 
 	/**
