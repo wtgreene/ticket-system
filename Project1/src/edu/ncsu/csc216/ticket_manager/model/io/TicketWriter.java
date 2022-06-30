@@ -24,8 +24,14 @@ public class TicketWriter {
 	 * @param ticketList ArrayList of tickets
 	 * @throws IOException if errors result from writing to the file
 	 */
-	public static void writeTicketFile(String filename, List<Ticket> ticketList) throws IOException {
-		PrintStream fileWriter = new PrintStream(new File(filename));
+	public static void writeTicketFile(String filename, List<Ticket> ticketList) {
+		PrintStream fileWriter = null;
+		
+		try {
+			fileWriter = new PrintStream(new File(filename));
+		} catch (IOException e) {
+			throw new IllegalArgumentException("TODO");
+		}
 
 		for (int i = 0; i < ticketList.size(); i++) {
 			fileWriter.print(ticketList.get(i).toString());
