@@ -918,7 +918,7 @@ public class Ticket {
 			case RESOLVE:
 				
 				if (command.getResolutionCode() != ResolutionCode.WORKAROUND
-						|| command.getResolutionCode() != ResolutionCode.CALLER_CLOSED) {
+						&& command.getResolutionCode() != ResolutionCode.CALLER_CLOSED) {
 					throw new UnsupportedOperationException("");
 				}
 				
@@ -976,7 +976,7 @@ public class Ticket {
 			case RESOLVE:
 				
 				if (command.getResolutionCode() != ResolutionCode.SOLVED
-						|| command.getResolutionCode() != ResolutionCode.CALLER_CLOSED) {
+						&& command.getResolutionCode() != ResolutionCode.CALLER_CLOSED) {
 					throw new UnsupportedOperationException("");
 				} 
 				
