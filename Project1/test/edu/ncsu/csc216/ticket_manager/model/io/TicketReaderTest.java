@@ -30,5 +30,6 @@ public class TicketReaderTest {
 		}
 		
 		assertEquals("GitHub down", list.get(0).getSubject());
+		list.clear();
 	}
 }

@@ -26,17 +26,8 @@ import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.TicketType;
  */
 public class TicketListTest {
 	
-	private static final int ID = 1;
-	private static final String STATE = Ticket.NEW_NAME;
-	private static final String TICKET_TYPE_STRING = Ticket.TT_INCIDENT;
 	private static final String SUBJECT = "Help";
 	private static final String CALLER = "wgreene";
-	private static final String CATEGORY_STRING = Ticket.C_INQUIRY;
-	private static final String PRIORITY_STRING = Ticket.P_HIGH;
-	private static final String OWNER = "bstark";
-	private static final String CODE = null;
-	private static final ArrayList<String> NOTES = null;
-	
 	private static final TicketType TICKET_TYPE = TicketType.INCIDENT;
 	private static final Category CATEGORY = Category.INQUIRY;
 	private static final Priority PRIORITY = Priority.HIGH;

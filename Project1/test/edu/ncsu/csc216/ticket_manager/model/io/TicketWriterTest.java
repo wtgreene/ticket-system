@@ -1,8 +1,6 @@
 package edu.ncsu.csc216.ticket_manager.model.io;
 
-import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,9 +11,6 @@ import java.util.Scanner;
 import org.junit.Test;
 
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket;
-import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Category;
-import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Priority;
-import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.TicketType;
 
 /**
  * Tests TicketWriter.java
@@ -24,7 +19,6 @@ import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.TicketType;
  */
 public class TicketWriterTest {
 	
-	private static final int ID = 1;
 	private static final String STATE = Ticket.NEW_NAME;
 	private static final String TICKET_TYPE_STRING = Ticket.TT_INCIDENT;
 	private static final String SUBJECT = "Help";
@@ -33,12 +27,6 @@ public class TicketWriterTest {
 	private static final String PRIORITY_STRING = Ticket.P_HIGH;
 	private static final String OWNER = "bstark";
 	private static final String CODE = null;
-	private static final ArrayList<String> NOTES = null;
-	
-	private static final TicketType TICKET_TYPE = TicketType.INCIDENT;
-	private static final Category CATEGORY = Category.INQUIRY;
-	private static final Priority PRIORITY = Priority.HIGH;
-	private static final String NOTE = "hi";
 	
 	/**
 	 * Tests TicketWriter.writeTicketFile().

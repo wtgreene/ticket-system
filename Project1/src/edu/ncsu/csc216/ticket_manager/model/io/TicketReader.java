@@ -29,9 +29,6 @@ public class TicketReader {
 	private static String owner;
 	private static String code;
 	private static ArrayList<String> notes = new ArrayList<String>();
-	private static int noteCounter = 0;
-	private static int totalNoteCounter = 0;
-	private static int lastNoteAmount = 0;
 	
 	/**
 	 * Reads tickets from a text file and returns a list of valid tickets.
@@ -48,17 +45,8 @@ public class TicketReader {
 			
 			String line = fileReader.nextLine();
 			
-			if (line.charAt(0) == '*' && id != 0) {
-				
-				ArrayList<String> ticketNotes = new ArrayList<String>();
-				for (int i = lastNoteAmount; i < totalNoteCounter; i++) {
-					ticketNotes.add(notes.get(i));
-				}
-					
+			if (line.charAt(0) == '*' && id != 0) {	
 				ticketList.add(new Ticket(id, state, ticketType, subject, caller, category, priority, owner, code, notes));
-				lastNoteAmount = totalNoteCounter;
-				id = 0;
-				noteCounter = 0;
 			}
 
 			if (line.charAt(0) == '*' && id == 0) {
@@ -96,8 +84,6 @@ public class TicketReader {
 			
 			else if (line.charAt(0) == '-') {
 				notes.add(line);
-				noteCounter++;
-				totalNoteCounter++;
 			}
 		}
 		

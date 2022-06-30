@@ -6,6 +6,7 @@ package edu.ncsu.csc216.ticket_manager.model.manager;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import edu.ncsu.csc216.ticket_manager.model.command.Command;
 import edu.ncsu.csc216.ticket_manager.model.command.Command.CommandValue;
@@ -32,13 +33,14 @@ public class TicketManagerTest {
 	private TicketManager manager;
 	
 	/**
-	 * Sets up the TicketManager.
+	 * Sets up the TicketManager and creates a new ticket list.
 	 * 
 	 * @throws Exception if error
 	 */
-	@Test
+	@BeforeEach
 	public void setUp() throws Exception {
 		manager = TicketManager.getInstance();
+		manager.createNewTicketList();
 	}
 	
 	/**
@@ -52,15 +54,14 @@ public class TicketManagerTest {
 	
 	// flagged
 	
-//	/**
-//	 * Tests TicketManager.loadTicketsFromFile().
-//	 */
-//	@Test
-//	public void testLoadTicketsFromFile() {
-//		manager = TicketManager.getInstance();
-//		assertDoesNotThrow(() -> manager.loadTicketsFromFile("test-files/ticket2.txt"));
-//		manager.createNewTicketList();
-//	}
+	/**
+	 * Tests TicketManager.loadTicketsFromFile().
+	 */
+	@Test
+	public void testLoadTicketsFromFile() {
+		manager = TicketManager.getInstance();
+		assertDoesNotThrow(() -> manager.loadTicketsFromFile("test-files/ticket2.txt"));
+	}
 	
 	/**
 	 * Tests TicketManager.createNewTicketList().
@@ -82,15 +83,15 @@ public class TicketManagerTest {
 	
 	// flagged
 	
-//	/**
-//	 * Tests TicketManager.getTicketsForDisplayByType().
-//	 */
-//	@Test
-//	public void testGetTicketsForDisplayByType() {
-//		manager = TicketManager.getInstance();
-//		manager.loadTicketsFromFile("test-files/ticket2.txt");
-//		assertDoesNotThrow(() -> manager.getTicketsForDisplayByType(TicketType.INCIDENT));
-//	}
+	/**
+	 * Tests TicketManager.getTicketsForDisplayByType().
+	 */
+	@Test
+	public void testGetTicketsForDisplayByType() {
+		manager = TicketManager.getInstance();
+		manager.loadTicketsFromFile("test-files/ticket1.txt");
+		assertDoesNotThrow(() -> manager.getTicketsForDisplayByType(TicketType.INCIDENT));
+	}
 	
 	/**
 	 * Tests TicketManager.getTicketById().
@@ -103,16 +104,16 @@ public class TicketManagerTest {
 	
 	// flagged
 	
-//	/**
-//	 * Tests TicketManager.executeCommand().
-//	 */
-//	@Test
-//	public void testExecuteCommand() {
-//		manager = TicketManager.getInstance();
-//		manager.loadTicketsFromFile("test-files/ticket2.txt");
-//		Command c = new Command(CommandValue.PROCESS, "wgreene", null, null, null, "hi");
-//		assertDoesNotThrow(() -> manager.executeCommand(1, c));
-//	}
+	/**
+	 * Tests TicketManager.executeCommand().
+	 */
+	@Test
+	public void testExecuteCommand() {
+		manager = TicketManager.getInstance();
+		manager.loadTicketsFromFile("test-files/ticket1.txt");
+		Command c = new Command(CommandValue.PROCESS, "wgreene", null, null, null, "hi");
+		assertDoesNotThrow(() -> manager.executeCommand(1, c));
+	}
 	
 	/**
 	 * Tests TicketManager.deleteTicketById().
