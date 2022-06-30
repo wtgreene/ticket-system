@@ -978,7 +978,7 @@ public class Ticket {
 				if (command.getResolutionCode() != ResolutionCode.SOLVED
 						|| command.getResolutionCode() != ResolutionCode.CALLER_CLOSED) {
 					throw new UnsupportedOperationException("");
-				}
+				} 
 				
 				feedbackCode = null;
 				resolutionCode = command.getResolutionCode();
