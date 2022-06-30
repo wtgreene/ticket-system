@@ -328,6 +328,9 @@ public class TicketTest {
 		assertThrows(UnsupportedOperationException.class, () -> t.update(c4));
 		assertThrows(UnsupportedOperationException.class, () -> t.update(c5));
 		assertThrows(UnsupportedOperationException.class, () -> t.update(c9));
+		
+		Ticket t2 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, NOTES);
+		t2.update(c9);
 	}
 	
 	/**
