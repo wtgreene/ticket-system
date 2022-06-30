@@ -917,7 +917,14 @@ public class Ticket {
 				break;
 			case RESOLVE:
 				
-				if (command.getResolutionCode() == null) {
+				if (getTicketType() == TicketType.INCIDENT && (command.getResolutionCode() == ResolutionCode.COMPLETED
+						|| command.getResolutionCode() == ResolutionCode.NOT_COMPLETED)) {
+					throw new UnsupportedOperationException();
+				}
+
+				else if (getTicketType() == TicketType.REQUEST && (command.getResolutionCode() == ResolutionCode.SOLVED
+						|| command.getResolutionCode() == ResolutionCode.NOT_SOLVED
+						|| command.getResolutionCode() == ResolutionCode.WORKAROUND)) {
 					throw new UnsupportedOperationException();
 				}
 				
@@ -974,7 +981,14 @@ public class Ticket {
 				throw new UnsupportedOperationException("");
 			case RESOLVE:
 				
-				if (command.getResolutionCode() == null) {
+				if (getTicketType() == TicketType.INCIDENT && (command.getResolutionCode() == ResolutionCode.COMPLETED
+						|| command.getResolutionCode() == ResolutionCode.NOT_COMPLETED)) {
+					throw new UnsupportedOperationException();
+				}
+
+				else if (getTicketType() == TicketType.REQUEST && (command.getResolutionCode() == ResolutionCode.SOLVED
+						|| command.getResolutionCode() == ResolutionCode.NOT_SOLVED
+						|| command.getResolutionCode() == ResolutionCode.WORKAROUND)) {
 					throw new UnsupportedOperationException();
 				}
 				
