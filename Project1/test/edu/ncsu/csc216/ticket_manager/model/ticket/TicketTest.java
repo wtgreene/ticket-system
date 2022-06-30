@@ -286,60 +286,69 @@ public class TicketTest {
 		notes.add("hi");
 		notes.add("hello");
 		
-		Ticket t = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, notes);
-		Command c1 = new Command(CommandValue.PROCESS, OWNER, null, null, null, "hi");
-		Command c2 = new Command(CommandValue.FEEDBACK, null, FeedbackCode.AWAITING_CALLER, null, null, "hi");
-		Command c3 = new Command(CommandValue.RESOLVE, null, null, ResolutionCode.CALLER_CLOSED, null, "hi");
-		Command c4 = new Command(CommandValue.CONFIRM, null, null, null, null, "hi");
-		Command c5 = new Command(CommandValue.REOPEN, null, null, null, null, "hi");
+		Ticket t11 = new Ticket(ID, "New", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, null, notes);
+		Ticket t12 = new Ticket(ID, "New", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, null, notes);
+		Ticket t21 = new Ticket(ID, "Working", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, null, notes);
+		Ticket t22 = new Ticket(ID, "Working", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, null, notes);
+		Ticket t23 = new Ticket(ID, "Working", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, null, notes);
+		Ticket t31 = new Ticket(ID, "Feedback", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, Command.F_PROVIDER, notes);
+		Ticket t32 = new Ticket(ID, "Feedback", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, Command.F_PROVIDER, notes);
+		Ticket t33 = new Ticket(ID, "Feedback", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, Command.F_PROVIDER, notes);
+		Ticket t41 = new Ticket(ID, "Resolved", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, Command.RC_COMPLETED, notes);
+		Ticket t42 = new Ticket(ID, "Resolved", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, Command.RC_COMPLETED, notes);
+		Ticket t43 = new Ticket(ID, "Resolved", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, Command.RC_COMPLETED, notes);
+		Ticket t51 = new Ticket(ID, "Closed", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, null, notes);
+		Ticket t61 = new Ticket(ID, "Canceled", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, Command.CC_DUPLICATE, notes);
 		
-		Command c6 = new Command(CommandValue.RESOLVE, null, null, ResolutionCode.NOT_COMPLETED, null, "hi");
-		Command c7 = new Command(CommandValue.FEEDBACK, null, FeedbackCode.AWAITING_CHANGE, null, null, "hi");
-		Command c8 = new Command(CommandValue.PROCESS, "new owner", null, null, null, "hi");
-		Command c9 = new Command(CommandValue.CANCEL, null, null, null, CancellationCode.INAPPROPRIATE, "hi");
+		Command process = new Command(CommandValue.PROCESS, OWNER, null, null, null, "hi");
+		Command reopen = new Command(CommandValue.REOPEN, null, null, null, null, "hi");
+		Command feedback = new Command(CommandValue.FEEDBACK, null, FeedbackCode.AWAITING_CALLER, null, null, "hi");
+		Command resolve = new Command(CommandValue.RESOLVE, null, null, ResolutionCode.CALLER_CLOSED, null, "hi");
+		Command confirm = new Command(CommandValue.CONFIRM, null, null, null, null, "hi");
+		Command cancel = new Command(CommandValue.CANCEL, null, null, null, CancellationCode.INAPPROPRIATE, "hi");
 
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c5));
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c2));
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c3));
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c4));
-		t.update(c1);
-		assertEquals(Ticket.WORKING_NAME, t.getState());
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c1));
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c5));
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c4));
-		t.update(c2);
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c5));
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c2));
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c4));
-		t.update(c3);
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c5));
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c3));
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c9));
-		t.update(c4);
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c1));
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c2));
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c3));
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c4));
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c9));
-		t.update(c5);
-		t.update(c6);
-		t.update(c7);
-		t.update(c8);
-		t.update(c9);
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c1));
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c2));
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c3));
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c4));
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c5));
-		assertThrows(UnsupportedOperationException.class, () -> t.update(c9));
+		assertThrows(UnsupportedOperationException.class, () -> t11.update(reopen));
+		assertThrows(UnsupportedOperationException.class, () -> t11.update(feedback));
+		assertThrows(UnsupportedOperationException.class, () -> t11.update(resolve));
+		assertThrows(UnsupportedOperationException.class, () -> t11.update(confirm));
+		t11.update(cancel);
+		assertEquals("Inappropriate", t11.getCancellationCode());
+		t12.update(process);
 		
-		Ticket t2 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, notes);
-		t2.update(c9);
+		assertThrows(UnsupportedOperationException.class, () -> t21.update(process));
+		assertThrows(UnsupportedOperationException.class, () -> t21.update(reopen));
+		assertThrows(UnsupportedOperationException.class, () -> t21.update(confirm));
+		t21.update(feedback);
+		t22.update(resolve);
+		t23.update(cancel);
 		
-		Ticket t3 = new Ticket(ID, STATE, TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, notes);
-		t3.update(c1);
-		t3.update(c2);
-		t3.update(c9); 
+		assertThrows(UnsupportedOperationException.class, () -> t31.update(process));
+		assertThrows(UnsupportedOperationException.class, () -> t31.update(feedback));
+		assertThrows(UnsupportedOperationException.class, () -> t31.update(confirm));
+		t31.update(reopen);
+		t32.update(resolve);
+		t33.update(cancel);
+		
+		assertThrows(UnsupportedOperationException.class, () -> t41.update(process));
+		assertThrows(UnsupportedOperationException.class, () -> t41.update(resolve));
+		assertThrows(UnsupportedOperationException.class, () -> t41.update(cancel));
+		t41.update(reopen);
+		t42.update(feedback);
+		t43.update(confirm);
+		
+		assertThrows(UnsupportedOperationException.class, () -> t51.update(process));
+		assertThrows(UnsupportedOperationException.class, () -> t51.update(feedback));
+		assertThrows(UnsupportedOperationException.class, () -> t51.update(resolve));
+		assertThrows(UnsupportedOperationException.class, () -> t51.update(confirm));
+		assertThrows(UnsupportedOperationException.class, () -> t51.update(cancel));
+		t51.update(reopen);
+		
+		assertThrows(UnsupportedOperationException.class, () -> t61.update(process));
+		assertThrows(UnsupportedOperationException.class, () -> t61.update(reopen));
+		assertThrows(UnsupportedOperationException.class, () -> t61.update(feedback));
+		assertThrows(UnsupportedOperationException.class, () -> t61.update(resolve));
+		assertThrows(UnsupportedOperationException.class, () -> t61.update(confirm));
+		assertThrows(UnsupportedOperationException.class, () -> t61.update(cancel));
 	}
 	
 	/**
