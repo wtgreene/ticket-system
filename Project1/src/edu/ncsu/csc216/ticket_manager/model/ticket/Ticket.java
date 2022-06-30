@@ -916,9 +916,12 @@ public class Ticket {
 				state = feedbackState;
 				break;
 			case RESOLVE:
-				if (command.getResolutionCode() == ResolutionCode.WORKAROUND) {
+				
+				if (command.getResolutionCode() != ResolutionCode.WORKAROUND
+						|| command.getResolutionCode() != ResolutionCode.CALLER_CLOSED) {
 					throw new UnsupportedOperationException("");
 				}
+				
 				resolutionCode = command.getResolutionCode();
 				notes.add(command.getNote());
 				state = resolvedState;
