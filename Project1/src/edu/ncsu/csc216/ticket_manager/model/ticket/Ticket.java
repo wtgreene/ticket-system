@@ -811,19 +811,15 @@ public class Ticket {
 		switch (state.getStateName()) {
 		
 		case NEW_NAME :
-			s2 = null;
-			break;
 		case WORKING_NAME :
-			s2 = null;
+		case CLOSED_NAME :
+			s2 = "";
 			break;
 		case FEEDBACK_NAME :
 			s2 = getFeedbackCode();
 			break;
 		case RESOLVED_NAME :
 			s2 = getResolutionCode();
-			break;
-		case CLOSED_NAME :
-			s2 = null;
 			break;
 		case CANCELED_NAME :
 			s2 = getCancellationCode();
