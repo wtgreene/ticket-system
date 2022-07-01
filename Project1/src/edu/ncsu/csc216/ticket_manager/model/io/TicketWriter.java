@@ -22,7 +22,7 @@ public class TicketWriter {
 	 * 
 	 * @param filename file to write tickets to
 	 * @param ticketList ArrayList of tickets
-	 * @throws IOException if errors result from writing to the file
+	 * @throws IllegalArgumentException if errors result from writing to the file
 	 */
 	public static void writeTicketFile(String filename, List<Ticket> ticketList) {
 		PrintStream fileWriter = null;
@@ -32,7 +32,7 @@ public class TicketWriter {
 			file = new File(filename);
 			fileWriter = new PrintStream(file);
 		} catch (IOException e) {
-			throw new IllegalArgumentException("TODO");
+			throw new IllegalArgumentException("Cannot write to file.");
 		}
 
 		for (int i = 0; i < ticketList.size(); i++) {

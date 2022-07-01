@@ -97,6 +97,7 @@ public class TicketManager {
 	 * 
 	 * @param ticketType ticket type
 	 * @return a String array of tickets by ticket type
+	 * @throws IllegalArgumentException if null ticketType
 	 */
 	public String[][] getTicketsForDisplayByType(TicketType ticketType) {
 		

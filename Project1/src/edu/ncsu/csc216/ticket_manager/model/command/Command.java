@@ -66,33 +66,33 @@ public class Command {
 	 * @param resolutionCode ResolutionCode
 	 * @param cancellationCode CancellationCode
 	 * @param note note
-	 * @throws IllegalArugmentException if parameters are invalid in one of the 6 ways below
+	 * @throws IllegalArgumentException if parameters are invalid in one of the 6 ways below
 	 */
 	public Command(CommandValue c, String ownerId, FeedbackCode feedbackCode, ResolutionCode resolutionCode, CancellationCode cancellationCode, String note) {
 		
 		// parameter error checking - null command
 		if (c == null) {
-			throw new IllegalArgumentException("TODO");
+			throw new IllegalArgumentException("Invalid command.");
 		}
 		
 		// parameter error checking - process command & null / empty owner id
 		if (c == CommandValue.PROCESS && (ownerId == null || "".equals(ownerId))) {
-			throw new IllegalArgumentException("TODO");
+			throw new IllegalArgumentException("Invalid command.");
 		}
 		
 		// parameter error checking - feedback command & null / empty feedback code
 		if (c == CommandValue.FEEDBACK && feedbackCode == null) {
-			throw new IllegalArgumentException("TODO");
+			throw new IllegalArgumentException("Invalid command.");
 		}
 		
 		// parameter error checking - resolve command & null / empty resolution code
 		if (c == CommandValue.RESOLVE && resolutionCode == null) {
-			throw new IllegalArgumentException("TODO");
+			throw new IllegalArgumentException("Invalid command.");
 		}
 		
 		// parameter error checking - cancel command & null / empty cancellation code
 		if (c == CommandValue.CANCEL && cancellationCode == null) {
-			throw new IllegalArgumentException("TODO");
+			throw new IllegalArgumentException("Invalid command.");
 		}
 		
 		// parameter error checking - null / empty note

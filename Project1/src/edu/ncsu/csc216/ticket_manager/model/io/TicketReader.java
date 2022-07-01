@@ -24,7 +24,7 @@ public class TicketReader {
 	 * 
 	 * @param filename file to read tickets from
 	 * @return a list of valid tickets
-	 * @throws FileNotFoundException if errors result from processing the file
+	 * @throws IllegalArgumentException if errors result from processing the file
 	 */
 	public static ArrayList<Ticket> readTicketFile(String filename) {
 		
@@ -85,9 +85,9 @@ public class TicketReader {
 					lineScanner.close();
 					
 				} catch (InputMismatchException e) {
-					throw new IllegalArgumentException("No Such Element Exception.");
-				} catch (NoSuchElementException e) {
 					throw new IllegalArgumentException("Input Mismatch Exception.");
+				} catch (NoSuchElementException e) {
+					throw new IllegalArgumentException("No Such Element Exception.");
 				}
 			}
 			
