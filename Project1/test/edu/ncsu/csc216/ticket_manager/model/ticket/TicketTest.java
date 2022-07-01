@@ -367,11 +367,11 @@ public class TicketTest {
 		Ticket t5 = new Ticket(ID, "Closed", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, CODE, notes);
 		Ticket t6 = new Ticket(ID, "Canceled", TICKET_TYPE_STRING, SUBJECT, CALLER, CATEGORY_STRING, PRIORITY_STRING, OWNER, Command.CC_DUPLICATE, notes);
 		
-		assertEquals("*" + ID + "#" + "New" + "#" + TICKET_TYPE_STRING + "#" + SUBJECT + "#" + CALLER + "#" + CATEGORY_STRING + "#" + PRIORITY_STRING + "#" + OWNER + "#" + CODE + "\n" + t1.getNotes(), t1.toString());
-		assertEquals("*" + ID + "#" + "Working" + "#" + TICKET_TYPE_STRING + "#" + SUBJECT + "#" + CALLER + "#" + CATEGORY_STRING + "#" + PRIORITY_STRING + "#" + OWNER + "#" + CODE + "\n" + t2.getNotes(), t2.toString());
+		assertEquals("*" + ID + "#" + "New" + "#" + TICKET_TYPE_STRING + "#" + SUBJECT + "#" + CALLER + "#" + CATEGORY_STRING + "#" + PRIORITY_STRING + "#" + OWNER + "#" + "" + "\n" + t1.getNotes(), t1.toString());
+		assertEquals("*" + ID + "#" + "Working" + "#" + TICKET_TYPE_STRING + "#" + SUBJECT + "#" + CALLER + "#" + CATEGORY_STRING + "#" + PRIORITY_STRING + "#" + OWNER + "#" + "" + "\n" + t2.getNotes(), t2.toString());
 		assertEquals("*" + ID + "#" + "Feedback" + "#" + TICKET_TYPE_STRING + "#" + SUBJECT + "#" + CALLER + "#" + CATEGORY_STRING + "#" + PRIORITY_STRING + "#" + OWNER + "#" + Command.F_CALLER + "\n" + t3.getNotes(), t3.toString());
 		assertEquals("*" + ID + "#" + "Resolved" + "#" + TICKET_TYPE_STRING + "#" + SUBJECT + "#" + CALLER + "#" + CATEGORY_STRING + "#" + PRIORITY_STRING + "#" + OWNER + "#" + Command.RC_CALLER_CLOSED + "\n" + t4.getNotes(), t4.toString());
-		assertEquals("*" + ID + "#" + "Closed" + "#" + TICKET_TYPE_STRING + "#" + SUBJECT + "#" + CALLER + "#" + CATEGORY_STRING + "#" + PRIORITY_STRING + "#" + OWNER + "#" + CODE + "\n" + t5.getNotes(), t5.toString());
+		assertEquals("*" + ID + "#" + "Closed" + "#" + TICKET_TYPE_STRING + "#" + SUBJECT + "#" + CALLER + "#" + CATEGORY_STRING + "#" + PRIORITY_STRING + "#" + OWNER + "#" + "" + "\n" + t5.getNotes(), t5.toString());
 		assertEquals("*" + ID + "#" + "Canceled" + "#" + TICKET_TYPE_STRING + "#" + SUBJECT + "#" + CALLER + "#" + CATEGORY_STRING + "#" + PRIORITY_STRING + "#" + OWNER + "#" + Command.CC_DUPLICATE + "\n" + t6.getNotes(), t6.toString());
 	}
 }
