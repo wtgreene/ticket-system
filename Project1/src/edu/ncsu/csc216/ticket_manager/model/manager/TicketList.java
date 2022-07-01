@@ -75,6 +75,12 @@ public class TicketList {
 	 * @return ticket list by ticket type
 	 */
 	public ArrayList<Ticket> getTicketsByType(TicketType ticketType) {
+		
+		// parameter error checking - null
+		if (ticketType == null) {
+			throw new IllegalArgumentException("Invalid ticket type.");
+		}
+		
 		ArrayList<Ticket> t = new ArrayList<Ticket>();
 		
 		for (int i = 0; i < tickets.size(); i++) {
