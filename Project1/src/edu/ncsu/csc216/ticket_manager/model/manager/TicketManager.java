@@ -99,6 +99,12 @@ public class TicketManager {
 	 * @return a String array of tickets by ticket type
 	 */
 	public String[][] getTicketsForDisplayByType(TicketType ticketType) {
+		
+		// parameter error checking - null
+		if (ticketType == null) {
+			throw new IllegalArgumentException("Invalid ticket type.");
+		}
+		
 		int numTickets = 0;
 		
 		for (int i = 0; i < ticketList.getTickets().size(); i++) {
