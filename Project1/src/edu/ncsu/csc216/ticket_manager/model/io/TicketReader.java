@@ -19,27 +19,6 @@ import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket;
  */
 public class TicketReader {
 	
-//	/** id */
-//	private static int id = 0;
-//	/** state name */
-//	private static String state;
-//	/** ticket type - string */
-//	private static String ticketType;
-//	/** subject */
-//	private static String subject;
-//	/** caller */
-//	private static String caller;
-//	/** category */
-//	private static String category;
-//	/** priority */
-//	private static String priority;
-//	/** owner */
-//	private static String owner;
-//	/** code */
-//	private static String code;
-//	/** notes */
-//	private static ArrayList<String> notes = new ArrayList<String>();
-	
 	/**
 	 * Reads tickets from a text file and returns a list of valid tickets.
 	 * 
@@ -48,7 +27,9 @@ public class TicketReader {
 	 * @throws FileNotFoundException if errors result from processing the file
 	 */
 	public static ArrayList<Ticket> readTicketFile(String filename) {
+		
 		Scanner fileReader = null;
+		
 		try {
 			fileReader = new Scanner(new FileInputStream(filename));
 		} catch (FileNotFoundException e) {
@@ -67,7 +48,7 @@ public class TicketReader {
 		String owner = "";
 		String code = "";
 		ArrayList<String> notes = new ArrayList<String>();
-		
+				
 		while (fileReader.hasNextLine()) {
 			
 			String line = fileReader.nextLine();
@@ -102,7 +83,7 @@ public class TicketReader {
 					}
 					
 					lineScanner.close();
-
+					
 				} catch (InputMismatchException e) {
 					throw new IllegalArgumentException("No Such Element Exception.");
 				} catch (NoSuchElementException e) {

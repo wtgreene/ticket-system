@@ -974,6 +974,7 @@ public class Ticket {
 			case PROCESS:
 				throw new UnsupportedOperationException("");
 			case REOPEN:
+				feedbackCode = null;
 				notes.add(command.getNote());
 				state = workingState;
 				break;
@@ -1093,6 +1094,7 @@ public class Ticket {
 			case PROCESS:
 				throw new UnsupportedOperationException("");
 			case REOPEN:
+				resolutionCode = null;
 				notes.add(command.getNote());
 				state = workingState;
 				break;
